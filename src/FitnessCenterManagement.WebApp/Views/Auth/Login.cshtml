@@ -1,0 +1,43 @@
+﻿@using FitnessCenterManagement.WebApp.Views.Auth.Resources
+@model FitnessCenterManagement.WebApp.Models.LoginModel
+@{
+    ViewBag.Title = AccountRes.LogInTitle;
+}
+
+<h2>@ViewBag.Title</h2>
+<h5>@AccountRes.UseLocalAccountText</h5>
+<hr />
+
+<div class="row">
+    <div class="mb-5 ml-5 mr-5 col-md-5">
+        <section id="inputForm">
+            @using (Html.BeginForm("Login", "Auth", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, htmlAttributes: new { @class = "form-horizontal", role = "form" }, antiforgery: true))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(false, "", new { @class = "text-danger", id = "validationSummary" })
+                <div class="form-group row">
+                    @Html.LabelFor(m => m.Email, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-8 p-0">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", id = "emailInput", placeholder = AccountRes.EmailLabel })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger inputError" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.LabelFor(m => m.Password, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-8 p-0">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", id = "passwordInput", placeholder = AccountRes.PasswordLabel })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger inputError" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12 p-0">
+                        <input type="submit" id="loginBtn" value="@AccountRes.LogInBtnText" class="btn btn-primary col-md-12" />
+                    </div>
+                </div>
+            }
+        </section>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
