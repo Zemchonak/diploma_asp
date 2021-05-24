@@ -1,0 +1,21 @@
+﻿@using FitnessCenterManagement.WebApp.Views.Home.Resources
+@model (string, string, bool, string)
+@{ var activeSlide = (Model.Item3) ? "active" : ""; }
+<div class="carousel-bg carousel-item @activeSlide">
+    <img class="carousel-bg carousel-slider-img d-block w-100" src="@Model.Item1">
+    <div class="carousel-caption" style="margin-bottom: @Model.Item4">
+        <h3 class="display-3 font-weight-bold">@Model.Item2</h3>
+        <br />
+        @if (User.Identity.IsAuthenticated)
+        {
+            <p>@HomeRes.EnjoySeeingYouAmongUsPhrase</p>
+            <a asp-action="Index" asp-controller="Profile" class="btn btn-rounded btn-orange-moon border-0">@HomeRes.ProfileBtn</a>
+        }
+        else
+        {
+            <p>@HomeRes.StillNotWithUsPhrase</p>
+            <a asp-action="Register" asp-controller="Auth" class="btn btn-rounded btn-orange-moon border-0">@HomeRes.JoinUsButton</a>
+        }
+
+    </div>
+</div>

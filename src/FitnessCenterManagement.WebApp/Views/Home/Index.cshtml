@@ -1,0 +1,25 @@
+﻿@using FitnessCenterManagement.WebApp.Views.Home.Resources
+@model FitnessCenterManagement.WebApp.Models.PersonViewModel
+@{
+    ViewBag.Title = HomeRes.HomeTitle;
+
+    var isAuthed = User.Identity.IsAuthenticated;
+
+}
+
+@section Scripts
+{
+    <script>
+        var footerElement = document.getElementById("mainPageFooter");
+        footerElement.style.display = "none";
+        var navBarElement = document.getElementById("mainNavbar");
+        navBarElement.classList.remove("mb-3");
+        $('#mainContainer').load('@Url.Action("CarouselPartial", "Home", null)');
+        var containerElement = document.getElementById("mainContainer");
+        containerElement.classList.remove("container");
+        containerElement.style.margin = containerElement.style.padding = 0;
+        var carouselInnerElement = document.getElementById("carouselInner");
+        carouselInnerElement.style.height = 500;
+        carouselInnerElement.style.height = carouselInnerElement.style.height - navBarElement.style.maxHeight;
+    </script>
+}
