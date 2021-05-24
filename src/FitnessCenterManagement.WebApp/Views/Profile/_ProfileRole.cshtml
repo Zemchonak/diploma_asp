@@ -1,0 +1,23 @@
+﻿@using FitnessCenterManagement.WebApp
+@using FitnessCenterManagement.WebApp.Views.Profile.Resources
+@model string
+@if (Model == Constants.UserRole)
+{
+    @ProfileRes.UserRole
+}
+else if (Model == Constants.TrainerRole)
+{
+    @ProfileRes.TrainerRole
+}
+else if (Model == Constants.ManagerRole)
+{
+    @ProfileRes.ManagerRole
+}
+else if (Model == Constants.MarketerRole)
+{
+    @ProfileRes.MarketerRole
+}
+else if (Model == Constants.DirectorRole)
+{
+    @ProfileRes.DirectorRole
+}

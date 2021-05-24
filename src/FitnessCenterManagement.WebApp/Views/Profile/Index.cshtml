@@ -1,0 +1,52 @@
+﻿@using FitnessCenterManagement.WebApp.Views.Profile.Resources
+@model FitnessCenterManagement.WebApp.Models.ProfileModel
+@{
+    ViewBag.Title = ProfileRes.YourProfileTitle;
+    var userId = User.FindFirst("userId").Value;
+}
+
+<h2 id="pageTitle">@ViewBag.Title</h2>
+
+<div style="display: inline">
+    <div class="card-group">
+        <div class="card">
+            <img style="max-width:30vw;max-height:65vh; align-self: center;" class="m-4" src="/Profile/avatar" />
+            <a asp-action="ChangeAvatar" asp-controller="Profile" class="btn btn-outline-secondary ml-4 mr-4">@ProfileRes.ChangeAvatarBtn</a>
+        </div>
+        <div class="card">
+            <div class="m-4">
+                <p><strong>@ProfileRes.SurnameLabel: </strong>@Model.Surname</p>
+                <p><strong>@ProfileRes.FirstNameLabel: </strong>@Model.FirstName</p>
+                <p><strong>@ProfileRes.LastNameLabel: </strong>@Model.LastName</p>
+                <p><strong>@ProfileRes.EmailLabel: </strong>@Model.Email</p>
+                <p><strong>@ProfileRes.AddressLabel: </strong>@Model.Address</p>
+                <p><strong>@ProfileRes.YourRoleLabel: </strong>@await Html.PartialAsync("_ProfileRole", Model.RoleName)</p>
+                @Html.ActionLink(ProfileRes.EditProfileInfoLabel, "Edit", "Profile", null, new { @class = "btn btn-outline-secondary" })
+                <hr>
+                <span class="text-success"><strong>@ProfileRes.BalanceLabel: </strong>@ProfileRes.CurrencySymbol@Model.Balance</span><a asp-action="ChangeBalance" asp-controller="Profile" class="btn btn-outline-secondary ml-3">@ProfileRes.ChangeBalanceLabel</a>
+                <hr>
+                <p><strong>@ProfileRes.LanguageLabel</strong></p>
+                @using (Html.BeginForm("Index", "Localization", FormMethod.Post, htmlAttributes: new { name = "formWithCulture" }))
+                {
+                    @Html.AntiForgeryToken();
+                    <div class="form-group">
+                        @Html.DropDownListFor(m => m.Language, new SelectList(Model.Languages, "Code", "Name", Model.LanguageName), new { @class = "form-control", id = "cultureList" })
+                    </div>
+                }
+                <hr>
+                <p>
+                    <strong>@ProfileRes.PasswordLabel: </strong>@Html.ActionLink(ProfileRes.ChangePasswordLabel, "ChangePassword", "Auth", null, htmlAttributes: new { @class = "btn btn-outline-secondary", @style = "margin-left:10px" })
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $("body").on("change", "#cultureList", function () {
+            document.forms["formWithCulture"].submit();
+        })
+    </script>
+}

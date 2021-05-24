@@ -1,0 +1,58 @@
+﻿@using FitnessCenterManagement.WebApp.Views.Profile.Resources
+@model FitnessCenterManagement.WebApp.Models.ProfileEditModel
+@{
+    ViewBag.Title = ProfileRes.EditTitle;
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<div class="row">
+    <div class="mb-5 ml-5 mr-5 col-md-5">
+        @using (Html.BeginForm("Edit", "Profile", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+
+            <div class="form-group row">
+                @Html.LabelFor(m => m.Surname, new { @class = "col-md-4 control-label" })
+                <div class="col-md-8 p-0">
+                    @Html.TextBoxFor(m => m.Surname, new { @class = "form-control", placeholder = ProfileRes.SurnameLabel, value = Model.Surname })
+                    <p class="text-danger">@Html.ValidationMessageFor(m => m.Surname)</p>
+                </div>
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(m => m.FirstName, new { @class = "col-md-4 control-label" })
+                <div class="col-md-8 p-0">
+                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", placeholder = ProfileRes.FirstNameLabel })
+                    <p class="text-danger">@Html.ValidationMessageFor(m => m.FirstName)</p>
+                </div>
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(m => m.LastName, new { @class = "col-md-4 control-label" })
+                <div class="col-md-8 p-0">
+                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", placeholder = ProfileRes.LastNameLabel })
+                    <p class="text-danger">@Html.ValidationMessageFor(m => m.LastName)</p>
+                </div>
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(m => m.Address, new { @class = "col-md-4 control-label" })
+                <div class="col-md-8 p-0">
+                    @Html.TextBoxFor(m => m.Address, new { @class = "form-control", placeholder = ProfileRes.AddressLabel })
+                    <p class="text-danger">@Html.ValidationMessageFor(m => m.Address)</p>
+                </div>
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(m => m.Email, new { @class = "col-md-4 control-label" })
+                <div class="col-md-8 p-0">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = ProfileRes.EmailLabel })
+                    <p class="text-danger">@Html.ValidationMessageFor(m => m.Email)</p>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-8">
+                    <input type="submit" value="@ProfileRes.SaveBtnValue" class="btn btn-primary" />
+                </div>
+            </div>
+        }
+    </div>
+</div>
