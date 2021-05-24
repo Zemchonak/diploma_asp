@@ -1,0 +1,30 @@
+﻿@using FitnessCenterManagement.WebApp.Views.Shared.Resources
+@{ 
+    var claimType = "given_name";
+    var username = User.Claims.FirstOrDefault(claim => claim.Type == claimType).Value;
+}
+<li class="nav-link text-dark p-0">
+    <div class="dropdown">
+        <a class="nav-link text-light p-0 pt-1" style="user-select: none"
+           id="dropdownMenu1" data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+            <img src="/Profile/avatar" class="mr-1 mt-1" style="height:50px; width:50px; border-radius:50%" />
+            <span id="usernameButton">@username</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <a class="dropdown-item pt-0 pb-0" id="logOutHeaderBtn" asp-action="Index" asp-controller="Profile">
+                <i class="fas fa-id-badge"></i>
+                <span>@SharedStringRes.MyProfileHeaderBtn</span>
+            </a>
+            <hr class="p-0 mt-3 mb-2" />
+            @using (Html.BeginForm("LogOff", "Auth", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+            {
+                @Html.AntiForgeryToken()
+                <a class="dropdown-item pt-0 pb-0" id="logOutHeaderBtn" href="javascript:document.getElementById('logoutForm').submit()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>@SharedStringRes.LogOutHeaderBtn</span>
+                </a>
+            }
+        </div>
+    </div>
+</li>

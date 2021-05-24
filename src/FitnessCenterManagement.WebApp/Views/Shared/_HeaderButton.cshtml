@@ -1,0 +1,16 @@
+﻿@model (string, string, string, string, string)
+@{ 
+    var classString = "nav-item";
+    if(!string.IsNullOrEmpty(Model.Item5))
+    {
+        classString = $"{Model.Item5}";
+    }
+}
+@*action, controller, icon_name, text, htmlClass*@ 
+
+<li class="@classString">
+    <a asp-action="@Model.Item1" asp-controller="@Model.Item2" class="nav-link text-light">
+        <i class="fas fa-@Model.Item3"></i>
+        <span>@Model.Item4</span>
+    </a>
+</li>

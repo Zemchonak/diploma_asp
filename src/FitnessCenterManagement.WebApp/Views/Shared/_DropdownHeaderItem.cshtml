@@ -1,0 +1,7 @@
+﻿@model (string, string, string, string, string)
+@* id, action, controller, iconname, text*@
+
+<a class="dropdown-item" id="@Model.Item1" asp-action="@Model.Item2" asp-controller="@Model.Item3">
+    <i class="fas fa-@Model.Item4"></i>
+    <span>@Model.Item5</span>
+</a>

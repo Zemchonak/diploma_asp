@@ -1,0 +1,24 @@
+﻿@using FitnessCenterManagement.WebApp.Views.Home.Resources
+@{ 
+    var defaultMarginBottom = "25vh";
+}
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="width: 100%;">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+    </ol>
+    <div class="carousel-inner" id="carouselInner">
+        @await Html.PartialAsync(partialViewName: "_CarouselItem", model: ("../images/background.jpg", HomeRes.Phrase1, true, "10vh"))
+        @await Html.PartialAsync(partialViewName: "_CarouselItem", model: ("../images/background2.jpg", HomeRes.Phrase2, false, defaultMarginBottom))
+        @await Html.PartialAsync(partialViewName: "_CarouselItem", model: ("../images/background3.jpg", HomeRes.Phrase3, false, defaultMarginBottom))
+        @await Html.PartialAsync(partialViewName: "_CarouselItem", model: ("../images/background4.jpg", HomeRes.Phrase4, false, defaultMarginBottom))
+    </div>
+</div>
+
+<script>
+    $('.carousel').carousel({
+        interval: 2700
+    })
+</script>

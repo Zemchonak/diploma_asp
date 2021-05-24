@@ -1,0 +1,18 @@
+﻿@using FitnessCenterManagement.WebApp.Views.Shared.Resources
+@model FitnessCenterManagement.WebApp.Models.ErrorViewModel
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@SharedStringRes.ErrorTitle</title>
+</head>
+<body>
+    <div role="alert" class="alert alert-danger">
+        <h1><strong>@SharedStringRes.ErrorTitle</strong></h1>
+        <h4 id="errorMessage">@Model.ErrorMessage</h4>
+    </div>
+    <br>
+    <div>
+        @Html.ActionLink(SharedStringRes.ReturnAfterErrorBtn, "Index", "Home", htmlAttributes: new { @class = "btn btn-outline-secondary" })
+    </div>
+</body>
+</html>

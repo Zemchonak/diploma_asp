@@ -1,0 +1,223 @@
+﻿@using FitnessCenterManagement.WebApp.Views.Shared.Resources
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - @SharedStringRes.ApplicationNameHalfOne@SharedStringRes.ApplicationNameHalfTwo</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+          integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    @RenderSection("HeadLinks", false)
+</head>
+@{
+    var isTrainer = User.IsInRole(FitnessCenterManagement.WebApp.Constants.TrainerRole);
+    var isDirector = User.IsInRole(FitnessCenterManagement.WebApp.Constants.DirectorRole);
+    var isManager = User.IsInRole(FitnessCenterManagement.WebApp.Constants.ManagerRole);
+    var isMarketer = User.IsInRole(FitnessCenterManagement.WebApp.Constants.MarketerRole);
+}
+<body id="pageBody">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-toggleable-lg navbar-dark bg-gradient box-shadow mb-3" id="mainNavbar">
+            <div class="container">
+                <a asp-action="Index" asp-controller="Home" class="navbar-brand nav-link text-light">
+                    <i class="material-icons" style="font-size: 18px">fitness_center</i>
+                    <span class="bold">@SharedStringRes.ApplicationNameHalfOne</span><span class="bold">@SharedStringRes.ApplicationNameHalfTwo</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-lg-inline-flex flex-md-row">
+                    <!--LEFT BUTTONS-->
+                    <ul class="navbar-nav flex-grow-1">
+                        @if (isDirector || isManager || isMarketer)
+                        {
+                            <li class="nav-item">
+                                <div class="dropdown">
+                                    <a class="nav-link text-light" style="user-select: none"
+                                       id="dropdownMenu1" data-toggle="dropdown"
+                                       aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-tools"></i>
+                                        <span id="usernameButton">@SharedStringRes.AdminFunctional</span>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuAdmin">
+                                        @if (isDirector)
+                                        {
+                                            @await Html.PartialAsync("_DropdownHeaderItem", ("usersBtn", "Index", "Users", "users", SharedStringRes.UsersBtn))
+                                        }
+                                        @if (isManager)
+                                        {
+                                            @await Html.PartialAsync("_DropdownHeaderItem", ("fitnessEventsBtn", "Index", "Events", "list-alt", SharedStringRes.EventsBtn))
+                                        }
+                                        @await Html.PartialAsync("_DropdownHeaderItem", ("specsBtn", "Index", "Specializations", "id-badge", SharedStringRes.SpecializationBtn))
+                                        @await Html.PartialAsync("_DropdownHeaderItem", ("reportsBtn", "Index", "Reports", "clipboard-list", SharedStringRes.ReportsBtn))
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <a class="nav-link text-light" style="user-select: none"
+                                   id="dropdownMenu1" data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-info-circle"></i>
+                                    <span id="usernameButton">@SharedStringRes.AboutFitnessCenterBtn</span>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuAdmin">
+                                    @await Html.PartialAsync("_DropdownHeaderItem", ("abonementsButton", "Index", "Abonements", "clipboard-list", SharedStringRes.AbonementsBtn))
+                                    @await Html.PartialAsync("_DropdownHeaderItem", ("schedulesButton", "Index", "Schedules", "calendar-day", SharedStringRes.SchedulesBtn))
+                                    @await Html.PartialAsync("_DropdownHeaderItem", ("venuesButton", "Index", "Venues", "door-open", SharedStringRes.VenuesBtn))
+                                    @await Html.PartialAsync("_DropdownHeaderItem", ("servicesButton", "Index", "Services", "th-list", SharedStringRes.ServicesBtn))
+                                    @await Html.PartialAsync("_DropdownHeaderItem", ("reviewsButton", "Index", "Reviews", "comment-dots", SharedStringRes.ReviewsBtn))
+                                    @await Html.PartialAsync("_DropdownHeaderItem", ("aboutUsButton", "About", "Home", "users", SharedStringRes.AboutUsBtn))
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="navbar-collapse collapse d-lg-inline-flex flex-md-row-reverse">
+                    <!--RIGHT BUTTONS-->
+                    <ul class="navbar-nav flex-grow-1-reverse">
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            @await Html.PartialAsync("_LoginRegisterRightNavButtons")
+                        }
+                        else
+                        {
+                            @await Html.PartialAsync("_ProfileLogoutRightNavButtons")
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container" id="mainContainer">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <footer class="text-center text-lg-start bg-light text-muted mt-auto" id="mainPageFooter">
+        <section class="">
+            <div class="container text-center text-md-start mt-5">
+                <div class="row mt-3">
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <h6 class="text-uppercase fw-bold mb-3">
+                            <i class="fas fa-dumbbell fa-x"></i> @SharedStringRes.ApplicationNameHalfOne@SharedStringRes.ApplicationNameHalfTwo
+                        </h6>
+                        <section class="d-flex justify-content-center align-content-lg-center p-4">
+                            <div>
+                                <p>@SharedStringRes.SocialsGetConnectedText</p>
+                                <a href="https://vk.com/zemchenok" class="me-4 text-reset">
+                                    <i class="fab fa-vk fa-2x"></i>
+                                </a>
+                                <a href="https://www.instagram.com/zemchenok_v" class="me-4 text-reset">
+                                    <i class="fab fa-instagram fa-2x"></i>
+                                </a>
+                                <a href="#" class="me-4 text-reset">
+                                    <i class="fab fa-odnoklassniki-square fa-2x"></i>
+                                </a>
+                                <a href="#" class="me-4 text-reset">
+                                    <i class="fab fa-twitter fa-2x"></i>
+                                </a>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            @SharedStringRes.ToClientsLabel
+                        </h6>
+                        <p>
+                            <a href="#!" class="text-reset">
+                                @SharedStringRes.OurTrainersBtn
+                            </a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">
+                                @SharedStringRes.VenuesBtn
+                            </a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">
+                                @SharedStringRes.LoyaltyProgramsBtn
+                            </a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">
+                                @SharedStringRes.ReviewsBtn
+                            </a>
+                        </p>
+                    </div>
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            @SharedStringRes.MenuFooterLabel
+                        </h6>
+                        <p>
+                            <a href="#!" class="text-reset">@SharedStringRes.ServicesBtn</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">@SharedStringRes.SchedulesBtn</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">@SharedStringRes.FullPriceListFooterBtn</a>
+                        </p>
+                    </div>
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            @SharedStringRes.ContactFooterLabel
+                        </h6>
+                        <p><i class="fas fa-home me-3"></i> @SharedStringRes.ContactAddress</p>
+                        <p>
+                            <i class="fas fa-envelope me-3"></i>
+                            @SharedStringRes.ContactEmail
+                        </p>
+                        <p><i class="fas fa-phone me-3"></i> @SharedStringRes.ContactPhone</p>
+                        <p><i class="fas fa-print me-3"></i> @SharedStringRes.ContactPhone2</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+            &copy; @DateTime.Now.Year - <a class="text-reset fw-bold" href="/">@SharedStringRes.ApplicationNameHalfOne@SharedStringRes.ApplicationNameHalfTwo</a>
+        </div>
+    </footer>
+
+    @*<script>
+            $(document).ready(function () {
+
+                $("button").click(function (e) {
+                    var action = $(e.target).attr("data-action");
+                    $.ajax({
+                        url: action == "all" ? "/api/game" : "/api/game/1",
+                        type: "GET",
+                        dataType: "json",
+                        success: function (data) {
+                            if (Array.isArray(data)) {
+                                var message = "";
+                                for (var i = 0; i < data.length; i++) {
+                                    message += "Item " + [i] + "\n"
+                                        + GetObjectString(data[i]) + "\n\n";
+                                }
+                                $("#results").text(message);
+                            } else {
+                                $("#results").text(GetObjectString(data));
+                            }
+                        }
+                    });
+                    e.preventDefault();
+                });
+            });
+        </script>*@
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
