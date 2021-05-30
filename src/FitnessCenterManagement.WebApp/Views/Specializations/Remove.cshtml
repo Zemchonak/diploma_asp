@@ -1,0 +1,15 @@
+﻿@using FitnessCenterManagement.WebApp.Views.Shared.Resources
+@using FitnessCenterManagement.WebApp.Views.Specializations.Resources
+@model FitnessCenterManagement.WebApp.Models.SpecializationModel
+@{
+    ViewData["Title"] = Specializations.RemoveSpec;
+}
+
+<h2>@Specializations.ConfirmRemoveText</h2>
+<br />
+<p><strong>@Specializations.InfoLabel</strong>: @Model.Info</p>
+<br />
+@await Html.PartialAsync("_ReturnGrayButton", ("Index", "Specializations", SharedStringRes.GoBackBtn))
+
+<a asp-action="ConfirmedRemove" asp-controller="Specializations" asp-route-id="@Model.Id" class="btn btn-danger">@SharedStringRes.DeleteBtn</a>
+
