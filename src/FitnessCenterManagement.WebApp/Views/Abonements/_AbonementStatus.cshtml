@@ -1,0 +1,10 @@
+﻿@model FitnessCenterManagement.WebApp.Models.AbonementStatus 
+
+@if (Model == AbonementStatus.Disabled)
+{
+    <span class="badge badge-danger w-50"><i class="fas fa-eye-slash fa-2x"></i></span>
+}
+else if (Model == AbonementStatus.Enabled)
+{
+    <span class="badge badge-success w-50"><i class="fas fa-eye fa-2x"></i></span>
+}

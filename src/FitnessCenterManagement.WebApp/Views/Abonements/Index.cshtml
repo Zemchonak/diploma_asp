@@ -1,0 +1,49 @@
+﻿@using FitnessCenterManagement.WebApp.Views.Abonements.Resources
+@using FitnessCenterManagement.WebApp.Views.Shared.Resources
+@model IReadOnlyCollection<FitnessCenterManagement.WebApp.Models.AbonementModel>
+@{
+    ViewData["Title"] = AbonementsRes.ItemsTitle;
+    var isManager = (User.IsInRole(FitnessCenterManagement.WebApp.Constants.ManagerRole));
+}
+
+<div class="container">
+    <h2>@SharedStringRes.AbonementsBtn</h2>
+    <hr />
+
+    @if (isManager)
+    {
+        <a id="manage" asp-action="manage" asp-controller="Abonements" class="btn btn-primary col-md-3">@AbonementsRes.ManageItemsBtn</a>
+        <hr />
+    }
+
+    <div class="row">
+        @foreach (var one in Model)
+        {
+            if(one.Status is AbonementStatus.Disabled)
+            {
+                if (isManager)
+                {
+                    <div class="col-sm-12 col-md-6">
+                    <div class="card align-items-center border-danger">
+                        <div class="card-body">
+                            <img src="/Abonements/@one.Id/image" style="display: block; height: 700px; width:300px;" />
+                            <span class="badge badge-danger mt-2 col-md-12"><i class="fas fa-eye-slash fa-2x"></i></span>
+                        </div>
+                    </div>
+                </div>
+                }
+            }
+            else
+            {
+                <div class="col-sm-12 col-md-6">
+                    <div class="card align-items-center">
+                        <div class="card-body">
+                            <img src="/Abonements/@one.Id/image" style="display: block; height: 700px; width:300px;" />
+                            <a class="btn btn-primary text-light mt-2 col-md-12"> Приобрести</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

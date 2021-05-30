@@ -1,0 +1,27 @@
+﻿@using FitnessCenterManagement.WebApp.Views.Shared.Resources
+@using FitnessCenterManagement.WebApp.Views.Abonements.Resources
+@model FitnessCenterManagement.WebApp.Models.AbonementModel
+@{
+    ViewData["Title"] = AbonementsRes.RemoveItem;
+}
+
+<h2>@AbonementsRes.ConfirmRemoveText</h2>
+<br />
+<div class="row">
+    <div class="col-sm-1 mr-5 p-3">
+        <div class="card border-0 ">
+            <img style=" width: 100px; height: 300px"
+                 src="/Abonements/@Model.Id/image" alt="Abonements Image" />
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card border-0 p-3">
+            <p><strong>@AbonementsRes.NameLabel</strong>: @Model.Name</p>
+            <p><strong>@AbonementsRes.CoefficientLabel</strong>: @Model.Coefficient</p>
+            <p><strong>@AbonementsRes.AttendancesLabel</strong>: @Model.Attendances</p>
+        </div>
+    </div>
+</div>
+@await Html.PartialAsync("_ReturnGrayButton", ("manage", "Abonements", SharedStringRes.GoBackBtn))
+
+<a asp-action="ConfirmedRemove" asp-controller="Abonements" asp-route-id="@Model.Id" class="btn btn-danger">@SharedStringRes.DeleteBtn</a>

@@ -1,0 +1,29 @@
+﻿@using FitnessCenterManagement.WebApp.Views.Abonements.Resources
+@using FitnessCenterManagement.WebApp.Views.Shared.Resources
+@model FitnessCenterManagement.WebApp.Models.ImageUploadModel
+@{ ViewBag.Title = AbonementsRes.ChangeImageBtn; }
+
+<div class="container">
+    <h2>@ViewBag.Title</h2>
+    <p>@ViewBag.Message</p>
+    <div class="row">
+        <div class="col-md-12">
+            @Html.HiddenFor(m => m.Id)
+            <img class="card-img-top" style="float: left; margin-right: 20px; margin-bottom:10px; margin-right: 20px; width: 18rem;"
+                 src="/Abonements/@Model.Id/image" alt="Abonement Image" />
+            <div class="col-md-10">
+                <h5>@AbonementsRes.ChooseFileHintText</h5>
+                @using (Html.BeginForm("ChangeImage", "Abonements", routeValues: new { id = Model.Id }, FormMethod.Post, null, new { enctype = "multipart/Form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="file" name="file" id="file" style="width:50%" />
+                    <input type="submit" value="@SharedStringRes.SaveBtnValue" class="btn btn-outline-primary" />
+                }
+            </div>
+
+            <hr />
+        </div>
+    </div>
+    <br />
+    @await Html.PartialAsync("_ReturnGrayButton", ("Index", "Abonements", SharedStringRes.GoBackBtn))
+</div>

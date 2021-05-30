@@ -430,5 +430,67 @@ namespace FitnessCenterManagement.WebApp.HttpClients
             var result = await Client.DeleteAsync(SetRequestPath($"Reviews/{id}"));
             return result;
         }
+
+
+        // ABONEMENTS
+
+        public async Task<HttpResponseMessage> GetAbonements(string part)
+        {
+            RequestHelper.SetRequestToken(Client, HttpContextAccessor);
+            var reqPath = "Abonements";
+            if (!string.IsNullOrEmpty(part))
+            {
+                reqPath += $"?part={part}";
+            }
+            var result = await Client.GetAsync(SetRequestPath(reqPath));
+            return result;
+        }
+
+        public async Task<HttpResponseMessage> GetAbonements(int id)
+        {
+            RequestHelper.SetRequestToken(Client, HttpContextAccessor);
+            var result = await Client.GetAsync(SetRequestPath($"Abonements/{id}"));
+            return result;
+        }
+
+        public async Task<HttpResponseMessage> GetAbonementByAuthorId(string authorId)
+        {
+            RequestHelper.SetRequestToken(Client, HttpContextAccessor);
+            var result = await Client.GetAsync(SetRequestPath($"Abonements/byAuthor/{authorId}"));
+            return result;
+        }
+
+        public async Task<HttpResponseMessage> PutAbonements(int id, StringContent content)
+        {
+            RequestHelper.SetRequestToken(Client, HttpContextAccessor);
+            var result = await Client.PutAsync(SetRequestPath($"Abonements/{id}"), content);
+            return result;
+        }
+
+        public async Task<HttpResponseMessage> PostAbonements(StringContent content)
+        {
+            RequestHelper.SetRequestToken(Client, HttpContextAccessor);
+            var result = await Client.PostAsync(SetRequestPath($"Abonements/"), content);
+            return result;
+        }
+
+        public async Task<HttpResponseMessage> DeleteAbonements(int id)
+        {
+            RequestHelper.SetRequestToken(Client, HttpContextAccessor);
+            var result = await Client.DeleteAsync(SetRequestPath($"Abonements/{id}"));
+            return result;
+        }
+
+        public async Task<HttpResponseMessage> GetAbonementsImage(int id)
+        {
+            var result = await Client.GetAsync(SetRequestPath($"Abonements/{id}/image"));
+            return result;
+        }
+        public async Task<HttpResponseMessage> PutAbonementsImage(int id, MultipartFormDataContent content)
+        {
+            RequestHelper.SetRequestToken(Client, HttpContextAccessor);
+            var result = await Client.PutAsync(SetRequestPath($"Abonements/{id}/image"), content);
+            return result;
+        }
     }
 }

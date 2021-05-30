@@ -1,0 +1,48 @@
+﻿@using FitnessCenterManagement.WebApp.Views.Shared.Resources
+@using FitnessCenterManagement.WebApp.Views.Abonements.Resources
+@model FitnessCenterManagement.WebApp.Models.AbonementModel
+@{
+    ViewData["Title"] = AbonementsRes.UpdateItem;
+}
+
+<h2>@ViewData["Title"]</h2>
+<hr />
+
+<form asp-controller="Abonements" asp-action="edit" asp-antiforgery="true" method="post">
+    <div class="validation" asp-validation-summary="ModelOnly"></div>
+    <input asp-for="Id" hidden="hidden" />
+    <input asp-for="Status" hidden="hidden" />
+    <input asp-for="ImageName" hidden="hidden" />
+
+    <div class="form-group row">
+        <label asp-for="Name" class="col-md-2 control-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Name" class="form-control" , placeholder="@AbonementsRes.NameLabel" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="Coefficient" class="col-md-2 control-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Coefficient" class="form-control" , placeholder="@AbonementsRes.CoefficientLabel" />
+            <span asp-validation-for="Coefficient" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="Attendances" class="col-md-2 control-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Attendances" class="form-control" , placeholder="@AbonementsRes.AttendancesLabel" />
+            <span asp-validation-for="Attendances" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <input type="submit" class="btn btn-primary btn-icon" value="@SharedStringRes.UpdateBtn" />
+        </div>
+    </div>
+</form>
+
+@await Html.PartialAsync("_ReturnGrayButton", ("manage", "Abonements", SharedStringRes.GoBackBtn))
