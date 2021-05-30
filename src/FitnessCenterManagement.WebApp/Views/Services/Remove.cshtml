@@ -1,0 +1,18 @@
+﻿@using FitnessCenterManagement.WebApp.Views.Shared.Resources
+@using FitnessCenterManagement.WebApp.Views.Services.Resources
+@model FitnessCenterManagement.WebApp.Models.ServiceModel
+@{
+    ViewData["Title"] = ServicesRes.RemoveItem;
+}
+
+<h2>@ServicesRes.ConfirmRemoveText</h2>
+<br />
+<p><strong>@ServicesRes.NameLabel</strong>: @Model.Name</p>
+<p><strong>@ServicesRes.DescriptionLabel</strong>: @Model.Description</p>
+<p><strong>@ServicesRes.PriceLabel</strong>: @SharedStringRes.CurrencySymbol@Model.Price</p>
+<p><strong>@ServicesRes.SpecializationLabel</strong>: @Model.SpecializationInfo</p>
+<br />
+@await Html.PartialAsync("_ReturnGrayButton", ("Index", "Services", SharedStringRes.GoBackBtn))
+
+<a asp-action="ConfirmedRemove" asp-controller="Services" asp-route-id="@Model.Id" class="btn btn-danger">@SharedStringRes.DeleteBtn</a>
+
