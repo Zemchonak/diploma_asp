@@ -53,7 +53,7 @@ namespace FitnessCenterManagement.WebApp
             {
                 var supportedCultures = LazyCultureProvider.Value.Cultures.Select(e => e).ToList();
 
-                options.DefaultRequestCulture = new RequestCulture(culture: "en-US", uiCulture: "en-US");
+                options.DefaultRequestCulture = new RequestCulture(culture: "ru-RU", uiCulture: "ru-RU");
                 options.SupportedCultures = supportedCultures;
                 options.SupportedUICultures = supportedCultures;
 
