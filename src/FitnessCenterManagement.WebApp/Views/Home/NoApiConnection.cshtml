@@ -1,5 +1,25 @@
 ﻿<div class="col-md-12">
-    <h1 style="align-self: center">
-        @FitnessCenterManagement.WebApp.Views.Auth.Resources.AccountRes.NoApiConnectionPhrase
-    </h1>
+    <div class="alert-danger m-3 p-3">
+        <h3 style="align-self: center">
+            @FitnessCenterManagement.WebApp.Views.Auth.Resources.AccountRes.NoApiConnectionPhrase
+        </h3>
+    </div>
 </div>
+
+
+@section Scripts
+{
+    <script>
+        var footerElement = document.getElementById("mainPageFooter");
+        footerElement.style.display = "none";
+        var navBarElement = document.getElementById("mainNavbar");
+        navBarElement.classList.remove("mb-3");
+        var containerElement = document.getElementById("mainContainer");
+        containerElement.classList.remove("container");
+        containerElement.style.margin = containerElement.style.padding = 0;
+        var leftButtonsHeader = document.getElementById("leftButtonsNav");
+        leftButtonsHeader.remove();
+        var rightButtonsHeader = document.getElementById("rightButtonsNav");
+        rightButtonsHeader.remove();
+    </script>
+}

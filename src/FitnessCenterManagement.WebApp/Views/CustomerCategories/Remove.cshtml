@@ -1,0 +1,16 @@
+﻿@using FitnessCenterManagement.WebApp.Views.Shared.Resources
+@using FitnessCenterManagement.WebApp.Views.CustomerCategories.Resources
+@model FitnessCenterManagement.WebApp.Models.CustomerCategoryModel
+@{
+    ViewData["Title"] = CustomerCategoriesRes.RemoveItem;
+}
+
+<h2>@CustomerCategoriesRes.ConfirmRemoveText</h2>
+<br />
+<p><strong>@CustomerCategoriesRes.NameLabel</strong>: @Model.Name</p>
+<p><strong>@CustomerCategoriesRes.SaleCoefficientLabel</strong>: @Model.SaleCoefficient</p>
+<br />
+@await Html.PartialAsync("_ReturnGrayButton", ("Index", "CustomerCategories", SharedStringRes.GoBackBtn))
+
+<a asp-action="ConfirmedRemove" asp-controller="CustomerCategories" asp-route-id="@Model.Id" class="btn btn-danger">@SharedStringRes.DeleteBtn</a>
+
