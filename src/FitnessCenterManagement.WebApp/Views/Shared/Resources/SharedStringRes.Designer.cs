@@ -124,6 +124,15 @@ namespace FitnessCenterManagement.WebApp.Views.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change.
+        /// </summary>
+        public static string ChangeText {
+            get {
+                return ResourceManager.GetString("ChangeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Choose....
         /// </summary>
         public static string ChooseDropdownHint {
@@ -193,6 +202,15 @@ namespace FitnessCenterManagement.WebApp.Views.Shared.Resources {
         public static string CurrencySymbol {
             get {
                 return ResourceManager.GetString("CurrencySymbol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Customer categoeries.
+        /// </summary>
+        public static string CustomerCategoriesBtn {
+            get {
+                return ResourceManager.GetString("CustomerCategoriesBtn", resourceCulture);
             }
         }
         
@@ -274,6 +292,15 @@ namespace FitnessCenterManagement.WebApp.Views.Shared.Resources {
         public static string LoyaltyProgramsBtn {
             get {
                 return ResourceManager.GetString("LoyaltyProgramsBtn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage reviews....
+        /// </summary>
+        public static string ManageReviewsBtn {
+            get {
+                return ResourceManager.GetString("ManageReviewsBtn", resourceCulture);
             }
         }
         

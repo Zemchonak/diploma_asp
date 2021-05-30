@@ -33,7 +33,7 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-lg-inline-flex flex-md-row">
+                <div id="leftButtonsNav" class="navbar-collapse collapse d-lg-inline-flex flex-md-row">
                     <!--LEFT BUTTONS-->
                     <ul class="navbar-nav flex-grow-1">
                         @if (isDirector || isManager || isMarketer)
@@ -54,6 +54,11 @@
                                         @if (isManager)
                                         {
                                             @await Html.PartialAsync("_DropdownHeaderItem", ("fitnessEventsBtn", "Index", "Events", "list-alt", SharedStringRes.EventsBtn))
+                                        }
+                                        @if (isMarketer)
+                                        {
+                                            @await Html.PartialAsync("_DropdownHeaderItem", ("reviewsButton", "Manage", "Reviews", "comment-dots", SharedStringRes.ManageReviewsBtn))
+                                            @await Html.PartialAsync("_DropdownHeaderItem", ("customerCategoriesBtn", "Index", "CustomerCategories", "user-friends", SharedStringRes.CustomerCategoriesBtn))
                                         }
                                         @await Html.PartialAsync("_DropdownHeaderItem", ("specsBtn", "Index", "Specializations", "id-badge", SharedStringRes.SpecializationBtn))
                                         @await Html.PartialAsync("_DropdownHeaderItem", ("reportsBtn", "Index", "Reports", "clipboard-list", SharedStringRes.ReportsBtn))
@@ -81,7 +86,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="navbar-collapse collapse d-lg-inline-flex flex-md-row-reverse">
+                <div  id="rightButtonsNav" class="navbar-collapse collapse d-lg-inline-flex flex-md-row-reverse">
                     <!--RIGHT BUTTONS-->
                     <ul class="navbar-nav flex-grow-1-reverse">
                         @if (!User.Identity.IsAuthenticated)

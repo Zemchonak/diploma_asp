@@ -241,4 +241,13 @@
   <data name="ChooseDropdownHint" xml:space="preserve">
     <value>Выберите...</value>
   </data>
+  <data name="CustomerCategoriesBtn" xml:space="preserve">
+    <value>Категории клиентов</value>
+  </data>
+  <data name="ManageReviewsBtn" xml:space="preserve">
+    <value>Управление отзывами...</value>
+  </data>
+  <data name="ChangeText" xml:space="preserve">
+    <value>Изменить</value>
+  </data>
 </root>

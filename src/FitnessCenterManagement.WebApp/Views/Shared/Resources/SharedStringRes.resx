@@ -241,4 +241,13 @@ Gomel, Rechitsky prospect, 135</value>
   <data name="ChooseDropdownHint" xml:space="preserve">
     <value>Choose...</value>
   </data>
+  <data name="CustomerCategoriesBtn" xml:space="preserve">
+    <value>Customer categoeries</value>
+  </data>
+  <data name="ManageReviewsBtn" xml:space="preserve">
+    <value>Manage reviews...</value>
+  </data>
+  <data name="ChangeText" xml:space="preserve">
+    <value>Change</value>
+  </data>
 </root>
