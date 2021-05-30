@@ -1,0 +1,15 @@
+﻿@using FitnessCenterManagement.WebApp.Views.Shared.Resources
+@using FitnessCenterManagement.WebApp.Views.Reviews.Resources
+@model FitnessCenterManagement.WebApp.Models.ReviewModel
+@{
+    ViewData["Title"] = ReviewsRes.RemoveItem;
+}
+
+<h2>@ReviewsRes.ConfirmRemoveText</h2>
+<br />
+<p><strong>@ReviewsRes.TextLabel</strong>: @Model.Text</p>
+<br />
+@await Html.PartialAsync("_ReturnGrayButton", ("Index", "Reviews", SharedStringRes.GoBackBtn))
+
+<a asp-action="ConfirmedRemove" asp-controller="Reviews" asp-route-id="@Model.Id" class="btn btn-danger">@SharedStringRes.DeleteBtn</a>
+

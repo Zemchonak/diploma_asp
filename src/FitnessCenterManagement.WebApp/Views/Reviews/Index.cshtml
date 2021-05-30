@@ -1,0 +1,81 @@
+﻿@using FitnessCenterManagement.WebApp.Views.Reviews.Resources
+@using FitnessCenterManagement.WebApp.Resources
+@model IReadOnlyCollection<FitnessCenterManagement.WebApp.Models.ReviewModel>
+@{
+    ViewData["Title"] = ReviewsRes.ItemsTitle;
+    var isMarketer = (User.IsInRole(FitnessCenterManagement.WebApp.Constants.MarketerRole));
+    var isAuthed = User.Identity.IsAuthenticated;
+    var userId = isAuthed? User.FindFirst("userId").Value : "";
+    var ownReview = Model.FirstOrDefault(e => e.UserId == userId);
+}
+<h2>@ReviewsRes.ItemsTitle</h2>
+<hr />
+<div class="form-group">
+    <div class="card border-0 p-0 pb-2 mr-auto">
+        @if (isMarketer)
+        {
+            <a id="manage" asp-action="manage" asp-controller="Reviews" class="btn btn-primary col-md-3">@ReviewsRes.ManageReviewsBtn</a>
+            <hr />
+        }
+        @if (isAuthed)
+        {
+            @if (ownReview != null)
+            {
+                <h4 class="pt-2">@ReviewsRes.YourReview:</h4>
+                <br />
+                <div class="alert alert-secondary col-md-12" role="alert">
+                    <div class="form-group row justify-content-center align-self-center">
+                        <strong>@ReviewsRes.IsAnonymousLabel</strong>
+                        @if (ownReview.IsAnonymous)
+                        {
+                            <input type="checkbox" class="form-control" checked="checked" disabled="disabled" />
+                        }
+                        else
+                        {
+                            <input type="checkbox" class="form-control" disabled="disabled" />
+                        }
+                    </div>
+                    @ownReview.Text
+                </div>
+                <a id="updateItem" asp-action="edit" asp-controller="Reviews" class="btn btn-primary col-md-3 align-self-center">@ReviewsRes.UpdateItem</a>
+                <br />
+                <hr />
+            }
+            else
+            {
+                <br />
+                <a id="createItem" asp-action="Create" asp-controller="Reviews" class="btn btn-primary">@ReviewsRes.CreateNewItem</a>
+                <br />
+            }
+        }
+    </div>
+
+    <div class="card-group d-flex justify-content-center">
+        @foreach (var one in Model)
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 p-1">
+                <div class="card" style="min-height:350px">
+                    @if (one.IsAnonymous)
+                    {
+                        <img class="pt-2" src="/Profile/image" style="height:100px; width:100px; align-self: center; border-radius:50%" />
+                    }
+                    else
+                    {
+                        <img class="pt-2" src="/Profile/@one.UserId/avatar" style="height:100px; width:100px; align-self: center; border-radius:50%" />
+                    }
+                    <div class="card-body">
+                        <h5 class="card-title" style="text-align: center">
+                            @if (isMarketer && one.IsAnonymous)
+                            {
+                                <span class="badge badge-danger w-15"><i class="fas fa-user-shield fa-1x"></i></span>
+                            }
+                            @one.UserData
+                        </h5>
+                        <p class="card-text">@one.Text</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<br />
