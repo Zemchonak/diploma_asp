@@ -1,0 +1,132 @@
+﻿@using FitnessCenterManagement.WebApp.Views.Venues.Resources
+@using FitnessCenterManagement.WebApp.Views.Shared.Resources
+@using FitnessCenterManagement.WebApp.Resources
+@model IReadOnlyCollection<FitnessCenterManagement.WebApp.Models.VenueModel>
+@{
+    ViewData["Title"] = VenueRes.ItemsTitle;
+    var isManager = (User.IsInRole(FitnessCenterManagement.WebApp.Constants.ManagerRole));
+
+    var isAdmin = (User.IsInRole(Constants.TrainerRole)
+        || User.IsInRole(Constants.ManagerRole) || User.IsInRole(Constants.DirectorRole));
+}
+<h2>@VenueRes.ItemsTitle</h2>
+<hr />
+@if (isAdmin)
+{
+    <div class="alert-success p-3">
+        <span><strong>@SharedStringRes.AttentionWord! </strong>@VenueRes.QrPressableMsg</span>
+    </div>
+}
+<br />
+<div class="form-group">
+    <div class="card border-0 p-0 pb-2 mr-auto col-md-4">
+        @if (isManager)
+        {
+            <a id="createItem" asp-action="Create" asp-controller="Venues" class="btn btn-primary">@VenueRes.CreateNewItem</a>
+        }
+    </div>
+    <fieldset>
+        <form action="" class="form-group" method="post">
+            <div class="table-responsive">
+                <div class="table-responsive">
+                    <table id="mainItemsTable" class="table table-striped" cellspacing="0" width="99%">
+                        <thead>
+                            <tr>
+                                @if (isAdmin)
+                                {
+                                    <th data-orderable="false" class="header"></th>
+                                }
+                                <th data-orderable="false" class="header"></th>
+                                <th class="header">@VenueRes.NameLabel </th>
+                                <th class="header">@VenueRes.LocationLabel</th>
+                                @if (isManager)
+                                {
+                                    <th data-orderable="false"></th>
+                                    <th data-orderable="false"></th>
+                                    <th data-orderable="false"></th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var one in Model)
+                            {
+                                <tr>
+                                    @if (isAdmin)
+                                    {
+                                        <td class="align-middle"><a href="/Venues/@one.Id/qr"><img src="/Venues/@one.Id/qr" style="width:240px; height:240px"></a></td>
+                                    }
+                                    <td class="align-middle"><img src="/Venues/@one.Id/image" style="width:320px; height:240px"></td>
+                                    <td>@one.Name </td>
+                                    <td>@one.Location</td>
+                                    @if (isManager)
+                                    {
+                                        <td class="align-middle"> <a href="Venues/@one.Id/image/change" class="btn btn-outline-primary"><i class="fas fa-image fa-1x"></td>
+                                        <td class="align-middle"> <a href="Venues/edit/@one.Id" class="btn btn-outline-primary"><i class="fas fa-pencil-alt fa-1x"></td>
+                                        <td class="align-middle"> <a href="Venues/remove/@one.Id" class="btn btn-outline-danger"><i class="fas fa-times fa-1x"></i></a> </td>
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </form>
+    </fieldset>
+</div>
+<br />
+
+
+@{
+    var tableLocalization = new System.Collections.Generic.Dictionary<string, string>()
+    {
+        ["lengthMenuText"] = JqueryTableStrings.LengthMenuString,
+        ["zeroRecordText"] = JqueryTableStrings.ZeroRecordsString,
+        ["infoText"] = JqueryTableStrings.InfoString,
+        ["infoEmptyText"] = JqueryTableStrings.InfoEmptyString,
+        ["infoFilteredText"] = JqueryTableStrings.InfoFilteredString,
+        ["emptyTableText"] = JqueryTableStrings.InfoFilteredString,
+        ["loadingText"] = JqueryTableStrings.LoadingString,
+        ["processingText"] = JqueryTableStrings.ProcessingString,
+        ["searchText"] = JqueryTableStrings.SearchString,
+        ["firstText"] = JqueryTableStrings.FirstString,
+        ["lastText"] = JqueryTableStrings.LastString,
+        ["nextText"] = JqueryTableStrings.NextString,
+        ["previousText"] = JqueryTableStrings.PreviousString,
+        ["ascText"] = JqueryTableStrings.ActivateAscending,
+        ["descText"] = JqueryTableStrings.ActivateDescending,
+    };
+}
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <link rel="stylesheet" href="~/css/jquery.dataTables.min.css" />
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#mainItemsTable').DataTable({
+                "language": {
+                    "lengthMenu": '@tableLocalization["lengthMenuText"]',
+                    "zeroRecords": '@tableLocalization["zeroRecordText"]',
+                    "info": '@tableLocalization["infoText"]',
+                    "infoEmpty": '@tableLocalization["infoEmptyText"]',
+                    "infoFiltered": '@tableLocalization["infoFilteredText"]',
+                    "emptyTable": '@tableLocalization["emptyTableText"]',
+                    "thousands": " ",
+                    "loadingRecords": '@tableLocalization["loadingText"]',
+                    "processing": '@tableLocalization["processingText"]',
+                    "search": '@tableLocalization["searchText"]',
+                    "paginate": {
+                        "first": '@tableLocalization["firstText"]',
+                        "last": '@tableLocalization["lastText"]',
+                        "next": '@tableLocalization["nextText"]',
+                        "previous": '@tableLocalization["previousText"]',
+                    },
+                    "aria": {
+                        "sortAscending": '@tableLocalization["ascText"]',
+                        "sortDescending": '@tableLocalization["descText"]',
+                    }
+                }
+            });
+        });
+    </script>
+}
