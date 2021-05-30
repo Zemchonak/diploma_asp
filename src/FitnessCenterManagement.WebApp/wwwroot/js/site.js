@@ -1,35 +1,28 @@
-﻿function updateTableByPart(requestUrlPath, aspnetPartParameterName, stringPart,
-    noItemsElementText, tableElement, tableBodyElement, tableHeaderElement, colspanAmount, tableRowPrinter) {
-    var urlPath = requestUrlPath;
-    if (stringPart != '') {
-        urlPath += '?' + aspnetPartParameterName + '=';
-        urlPath += stringPart;
+﻿function getTableTexts() {
+    var items = [
+        "lengthMenuText",
+        "zeroRecordText",
+        "infoText",
+        "infoEmptyText",
+        "infoFilteredText",
+        "emptyTableText",
+        "loadingText",
+        "processingText",
+        "searchText",
+        "firstText",
+        "lastText",
+        "nextText",
+        "previousText",
+        "ascText",
+        "descText",
+    ]
+
+    var texts = [];
+    for(let one of items){
+        texts.push(
+            document.getElementById(one).innerText
+        );
+        document.getElementById(one).remove();
     }
-
-    var table = tableElement;
-    while (table.rows.length > 1)
-        table.deleteRow(1);
-
-    $.ajax({
-        type: 'GET',
-        url: urlPath,
-        error: function (error) {
-            console.log('Error with receiving data: ' + error)
-        },
-        success: function (result) {
-            let s = '';
-            if (result.length == 0) {
-                s += '<tr>';
-                s += '<td colspan="' + colspanAmount+'" class="text-center">' + noItemsElementText + '</td>';
-                s += '</tr>';
-            }
-            else {
-                for (let el of result) {
-                    s += tableRowPrinter(el);
-                }
-            }
-            $(tableBodyElement).after(tableHeaderElement);
-            $(tableHeaderElement).after(s);
-        }
-    });
+    return texts;
 }
