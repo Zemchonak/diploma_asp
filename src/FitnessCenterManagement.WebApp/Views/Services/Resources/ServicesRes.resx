@@ -138,9 +138,6 @@
   <data name="NoItemsText" xml:space="preserve">
     <value>No services</value>
   </data>
-  <data name="PartOfNameOrDescription" xml:space="preserve">
-    <value>Input here a part of the name or the description</value>
-  </data>
   <data name="ConfirmRemoveText" xml:space="preserve">
     <value>Do you confirm you want to remove this service?</value>
   </data>

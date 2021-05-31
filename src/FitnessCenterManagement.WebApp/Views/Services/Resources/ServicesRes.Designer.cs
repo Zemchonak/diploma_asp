@@ -115,15 +115,6 @@ namespace FitnessCenterManagement.WebApp.Views.Services.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Input here a part of the name or the description.
-        /// </summary>
-        public static string PartOfNameOrDescription {
-            get {
-                return ResourceManager.GetString("PartOfNameOrDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Price.
         /// </summary>
         public static string PriceLabel {

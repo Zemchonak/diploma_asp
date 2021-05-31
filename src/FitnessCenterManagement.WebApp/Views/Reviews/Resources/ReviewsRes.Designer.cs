@@ -88,24 +88,6 @@ namespace FitnessCenterManagement.WebApp.Views.Reviews.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Description.
-        /// </summary>
-        public static string DescriptionLabel {
-            get {
-                return ResourceManager.GetString("DescriptionLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Edit my review.
-        /// </summary>
-        public static string EditMyReviewLabel {
-            get {
-                return ResourceManager.GetString("EditMyReviewLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Show as anonymous.
         /// </summary>
         public static string IsAnonymousLabel {
@@ -120,15 +102,6 @@ namespace FitnessCenterManagement.WebApp.Views.Reviews.Resources {
         public static string IsHiddenLabel {
             get {
                 return ResourceManager.GetString("IsHiddenLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Review.
-        /// </summary>
-        public static string ItemLabel {
-            get {
-                return ResourceManager.GetString("ItemLabel", resourceCulture);
             }
         }
         
@@ -156,15 +129,6 @@ namespace FitnessCenterManagement.WebApp.Views.Reviews.Resources {
         public static string NoItemsText {
             get {
                 return ResourceManager.GetString("NoItemsText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to is still not added....
-        /// </summary>
-        public static string NotAddedMsg {
-            get {
-                return ResourceManager.GetString("NotAddedMsg", resourceCulture);
             }
         }
         

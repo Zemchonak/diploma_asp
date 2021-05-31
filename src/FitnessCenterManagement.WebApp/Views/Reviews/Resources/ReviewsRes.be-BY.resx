@@ -123,9 +123,6 @@
   <data name="IsAnonymousLabel" xml:space="preserve">
     <value>Паказваць як ананiмны</value>
   </data>
-  <data name="EditMyReviewLabel" xml:space="preserve">
-    <value>Рэдагаваць мой водгук</value>
-  </data>
   <data name="IsHiddenLabel" xml:space="preserve">
     <value>Скрыты</value>
   </data>
@@ -138,17 +135,11 @@
   <data name="UpdateItem" xml:space="preserve">
     <value>Аднавіць водгук</value>
   </data>
-  <data name="DescriptionLabel" xml:space="preserve">
-    <value>Апісанне</value>
-  </data>
   <data name="CreateNewItem" xml:space="preserve">
     <value>Адправiць водгук</value>
   </data>
   <data name="RemoveItem" xml:space="preserve">
     <value>Выдаліць водгук</value>
-  </data>
-  <data name="ItemLabel" xml:space="preserve">
-    <value>Водгук</value>
   </data>
   <data name="ItemsTitle" xml:space="preserve">
     <value>Водгукі</value>
@@ -158,9 +149,6 @@
   </data>
   <data name="YourReview" xml:space="preserve">
     <value>Ваш водгук</value>
-  </data>
-  <data name="NotAddedMsg" xml:space="preserve">
-    <value>усё яшчэ не дабаўлены...</value>
   </data>
   <data name="ManageReviewsBtn" xml:space="preserve">
     <value>Кiраванне водгукамi....</value>

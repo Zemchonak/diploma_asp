@@ -138,9 +138,6 @@
   <data name="NoItemsText" xml:space="preserve">
     <value>Няма паслуг</value>
   </data>
-  <data name="PartOfNameOrDescription" xml:space="preserve">
-    <value>Напішыце сюды частку імені або апісання</value>
-  </data>
   <data name="ConfirmRemoveText" xml:space="preserve">
     <value>Вы пацвярджаеце, што жадаеце выдаліць гэту паслугу?</value>
   </data>

@@ -123,9 +123,6 @@
   <data name="IsAnonymousLabel" xml:space="preserve">
     <value>Показывать анонимным</value>
   </data>
-  <data name="EditMyReviewLabel" xml:space="preserve">
-    <value>Редактировать мой отзыв</value>
-  </data>
   <data name="IsHiddenLabel" xml:space="preserve">
     <value>Скрытый</value>
   </data>
@@ -138,17 +135,11 @@
   <data name="UpdateItem" xml:space="preserve">
     <value>Обновить отзыв</value>
   </data>
-  <data name="DescriptionLabel" xml:space="preserve">
-    <value>Описание</value>
-  </data>
   <data name="CreateNewItem" xml:space="preserve">
     <value>Отправить отзыв</value>
   </data>
   <data name="RemoveItem" xml:space="preserve">
     <value>Удалить отзыв</value>
-  </data>
-  <data name="ItemLabel" xml:space="preserve">
-    <value>Отзыв</value>
   </data>
   <data name="ItemsTitle" xml:space="preserve">
     <value>Отзывы</value>
@@ -158,9 +149,6 @@
   </data>
   <data name="YourReview" xml:space="preserve">
     <value>Ваш отзыв</value>
-  </data>
-  <data name="NotAddedMsg" xml:space="preserve">
-    <value>всё ещё не добавлен...</value>
   </data>
   <data name="ManageReviewsBtn" xml:space="preserve">
     <value>Управление отзывами...</value>

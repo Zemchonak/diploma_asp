@@ -138,9 +138,6 @@
   <data name="NoItemsText" xml:space="preserve">
     <value>Нет услуг</value>
   </data>
-  <data name="PartOfNameOrDescription" xml:space="preserve">
-    <value>Напишите сюда часть имени или описания</value>
-  </data>
   <data name="ConfirmRemoveText" xml:space="preserve">
     <value>Вы подтверждаете, что хотите удалить эту услугу?</value>
   </data>
