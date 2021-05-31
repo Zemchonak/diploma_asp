@@ -13,6 +13,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Models\Resources\AbonementsRes.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AbonementsRes.resx</DependentUpon>
+    </Compile>
     <Compile Update="Models\Resources\ChangePasswordViewModelRes.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -27,6 +32,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>EditProfileViewModelRes.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Models\Resources\FitnessEventsRes.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FitnessEventsRes.resx</DependentUpon>
     </Compile>
     <Compile Update="Models\Resources\LoginViewModelRes.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -63,6 +73,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>StringResources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Views\Abonements\Resources\AbonementsRes.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AbonementsRes.resx</DependentUpon>
+    </Compile>
     <Compile Update="Views\Auth\Resources\AccountRes.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -77,6 +92,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>EventsRes.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Views\FitnessEvents\Resources\FitnessEventsRes.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FitnessEventsRes.resx</DependentUpon>
     </Compile>
     <Compile Update="Views\Home\Resources\HomeRes.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -121,6 +141,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Models\Resources\AbonementsRes.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AbonementsRes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Models\Resources\ChangePasswordViewModelRes.be-BY.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
@@ -141,6 +165,10 @@
     <EmbeddedResource Update="Models\Resources\EditProfileViewModelRes.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>EditProfileViewModelRes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Models\Resources\FitnessEventsRes.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FitnessEventsRes.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Models\Resources\LoginViewModelRes.be-BY.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -188,6 +216,10 @@
     <EmbeddedResource Update="Resources\StringResources.ru-RU.resx">
       <Generator></Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\Abonements\Resources\AbonementsRes.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AbonementsRes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\Auth\Resources\AccountRes.be-BY.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
@@ -205,6 +237,10 @@
     <EmbeddedResource Update="Views\Events\Resources\EventsRes.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>EventsRes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\FitnessEvents\Resources\FitnessEventsRes.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FitnessEventsRes.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Home\Resources\HomeRes.be-BY.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -29,6 +29,7 @@ namespace FitnessCenterManagement.WebApp.HttpClients
             var result = await Client.PostAsync(SetRequestPath("Auth/login"), content);
             return result;
         }
+
         public async Task<HttpResponseMessage> GetUsersValidateToken(string token)
         {
             using var content = JsonHelper.ObjectToStringContent(token);
@@ -122,7 +123,6 @@ namespace FitnessCenterManagement.WebApp.HttpClients
             var result = await Client.PutAsync(SetRequestPath($"Profile/avatar"), content);
             return result;
         }
-
 
         // SPECIALIZATIONS
 
@@ -490,6 +490,48 @@ namespace FitnessCenterManagement.WebApp.HttpClients
         {
             RequestHelper.SetRequestToken(Client, HttpContextAccessor);
             var result = await Client.PutAsync(SetRequestPath($"Abonements/{id}/image"), content);
+            return result;
+        }
+
+        // FITNESS EVENTS
+
+        public async Task<HttpResponseMessage> GetFitnessEvents(string part)
+        {
+            var reqPath = "FitnessEvents";
+            if (!string.IsNullOrEmpty(part))
+            {
+                reqPath += $"?part={part}";
+            }
+            RequestHelper.SetRequestToken(Client, HttpContextAccessor);
+            var result = await Client.GetAsync(SetRequestPath(reqPath));
+            return result;
+        }
+
+        public async Task<HttpResponseMessage> GetFitnessEvents(int id)
+        {
+            RequestHelper.SetRequestToken(Client, HttpContextAccessor);
+            var result = await Client.GetAsync(SetRequestPath($"FitnessEvents/{id}"));
+            return result;
+        }
+
+        public async Task<HttpResponseMessage> PutFitnessEvents(int id, StringContent content)
+        {
+            RequestHelper.SetRequestToken(Client, HttpContextAccessor);
+            var result = await Client.PutAsync(SetRequestPath($"FitnessEvents/{id}"), content);
+            return result;
+        }
+
+        public async Task<HttpResponseMessage> PostFitnessEvents(StringContent content)
+        {
+            RequestHelper.SetRequestToken(Client, HttpContextAccessor);
+            var result = await Client.PostAsync(SetRequestPath($"FitnessEvents/"), content);
+            return result;
+        }
+
+        public async Task<HttpResponseMessage> DeleteFitnessEvents(int id)
+        {
+            RequestHelper.SetRequestToken(Client, HttpContextAccessor);
+            var result = await Client.DeleteAsync(SetRequestPath($"FitnessEvents/{id}"));
             return result;
         }
     }
