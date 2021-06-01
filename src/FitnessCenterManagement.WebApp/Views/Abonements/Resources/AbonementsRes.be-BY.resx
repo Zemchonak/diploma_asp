@@ -142,7 +142,7 @@
     <value>Абанементы</value>
   </data>
   <data name="ConfirmRemoveText" xml:space="preserve">
-    <value>Вы пацвярджаеце, што жадаеце выдаліць гэты abonement?</value>
+    <value>Вы пацвярджаеце, што жадаеце выдаліць гэты абанемент?</value>
   </data>
   <data name="RemoveItem" xml:space="preserve">
     <value>Выдаліць абанемент</value>
@@ -158,5 +158,11 @@
   </data>
   <data name="ChangeImageBtn" xml:space="preserve">
     <value>Змяніць фотаздымак</value>
+  </data>
+  <data name="RemoveFitnessEvent" xml:space="preserve">
+    <value>Вы пацвярджаеце, што жадаеце выдаліць гэтую паслугу з абанемента?</value>
+  </data>
+  <data name="AddFitnessEvent" xml:space="preserve">
+    <value>Дадаць фiтнес мерапрыемства да абанемента</value>
   </data>
 </root>

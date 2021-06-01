@@ -61,6 +61,15 @@ namespace FitnessCenterManagement.WebApp.Views.Abonements.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add a fitness event to the abonement.
+        /// </summary>
+        public static string AddFitnessEvent {
+            get {
+                return ResourceManager.GetString("AddFitnessEvent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Attendances.
         /// </summary>
         public static string AttendancesLabel {
@@ -156,6 +165,15 @@ namespace FitnessCenterManagement.WebApp.Views.Abonements.Resources {
         public static string NoItemsText {
             get {
                 return ResourceManager.GetString("NoItemsText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you confirm you want to remove this fitness event from the abonement?.
+        /// </summary>
+        public static string RemoveFitnessEvent {
+            get {
+                return ResourceManager.GetString("RemoveFitnessEvent", resourceCulture);
             }
         }
         

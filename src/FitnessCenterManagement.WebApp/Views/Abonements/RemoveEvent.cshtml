@@ -1,0 +1,37 @@
+﻿@using FitnessCenterManagement.WebApp.Views.Shared.Resources
+@using FitnessCenterManagement.WebApp.Views.Abonements.Resources
+@using FitnessCenterManagement.WebApp.Views.FitnessEvents.Resources
+@model FitnessCenterManagement.WebApp.Models.AbonementOwnFitnessEventsModel
+@{
+    ViewData["Title"] = AbonementsRes.RemoveFitnessEvent;
+    var removable = Model.FitnessEvents.First();
+}
+
+<br />
+<div class="row">
+    <div class="col-sm-1 mr-5 p-3">
+        <div class="card border-0 ">
+            <img style=" width: 100px; height: 300px"
+                 src="/Abonements/@Model.Id/image" alt="Abonements Image" />
+        </div>
+    </div>
+    <div class="col-sm-8">
+        <div class="card border-0 p-3">
+            <h5><strong>@AbonementsRes.NameLabel</strong>: @Model.Name</h5>
+            <h5><strong>@AbonementsRes.CoefficientLabel</strong>: @Model.Coefficient</h5>
+            <h5><strong>@AbonementsRes.AttendancesLabel</strong>: @Model.Attendances</h5>
+            <div class="alert alert-danger">
+                <h5>@ViewData["Title"]</h5>
+                <h5><strong>@FitnessEventsRes.MinutesLabel</strong>: @removable.Item2.Minutes </h5>
+                <h5><strong>@FitnessEventsRes.ServiceInfoLabel</strong>: @removable.Item2.ServiceInfo</h5>
+                <h5><strong>@FitnessEventsRes.VenueInfoLabel</strong>: @removable.Item2.VenueInfo</h5>
+                <br />
+                <a asp-action="ConfirmedRemoveEvent" asp-controller="Abonements" asp-route-id="@removable.Item1" class="btn btn-danger">@SharedStringRes.DeleteBtn</a>
+            </div>
+            <a asp-action="Info" asp-controller="Abonements" asp-route-id="@Model.Id" class="btn btn-outline-secondary col-md-3">
+                <i class="fas fa-arrow-left"></i>
+                <span>@SharedStringRes.GoBackBtn</span>
+            </a>
+        </div>
+    </div>
+</div>

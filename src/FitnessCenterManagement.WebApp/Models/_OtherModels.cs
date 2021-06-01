@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FitnessCenterManagement.WebApp.Models.Resources;
+using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
 namespace FitnessCenterManagement.WebApp.Models
 {
@@ -60,5 +62,15 @@ namespace FitnessCenterManagement.WebApp.Models
         public int Id { get; set; }
 
         public IFormFile File { get; set; }
+    }
+
+    public class AbonementFitnessEventModel
+    {
+        public int Id { get; set; }
+
+        [Display(ResourceType = typeof(Views.FitnessEvents.Resources.FitnessEventsRes), Name = "ItemLabel")]
+        public int FitnessEventId { get; set; }
+
+        public int AbonementId { get; set; }
     }
 }

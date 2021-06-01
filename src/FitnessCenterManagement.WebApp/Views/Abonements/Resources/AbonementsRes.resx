@@ -139,4 +139,10 @@
   <data name="ChangeImageBtn" xml:space="preserve">
     <value>Change image</value>
   </data>
+  <data name="AddFitnessEvent" xml:space="preserve">
+    <value>Add a fitness event to the abonement</value>
+  </data>
+  <data name="RemoveFitnessEvent" xml:space="preserve">
+    <value>Do you confirm you want to remove this fitness event from the abonement?</value>
+  </data>
 </root>

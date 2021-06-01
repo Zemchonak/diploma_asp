@@ -9,6 +9,8 @@ namespace FitnessCenterManagement.WebApp.HttpClients.Interfaces
 
         public Task<HttpResponseMessage> GetAbonements(int id);
 
+        public Task<HttpResponseMessage> GetAbonementsPrice(int id);
+
         public Task<HttpResponseMessage> PutAbonements(int id, StringContent content);
 
         public Task<HttpResponseMessage> PostAbonements(StringContent content);

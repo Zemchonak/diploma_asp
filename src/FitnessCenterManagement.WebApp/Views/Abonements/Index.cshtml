@@ -27,6 +27,7 @@
                     <div class="card align-items-center border-danger">
                         <div class="card-body">
                             <img src="/Abonements/@one.Id/image" style="display: block; height: 700px; width:300px;" />
+                            <h4 class="d-flex justify-content-center pt-1">@one.Name</h4>
                             <span class="badge badge-danger mt-2 col-md-12"><i class="fas fa-eye-slash fa-2x"></i></span>
                         </div>
                     </div>
@@ -38,8 +39,12 @@
                 <div class="col-sm-12 col-md-6">
                     <div class="card align-items-center">
                         <div class="card-body">
-                            <img src="/Abonements/@one.Id/image" style="display: block; height: 700px; width:300px;" />
-                            <a class="btn btn-primary text-light mt-2 col-md-12"> Приобрести</a>
+                            <a asp-action="info" asp-controller="Abonements" asp-route-id="@one.Id">
+                                <img src="/Abonements/@one.Id/image" style="display: block; height: 700px; width:300px;" />
+                            </a>
+                            <h4 class="d-flex justify-content-center pt-1">@one.Name</h4>
+                            <a asp-action="info" asp-controller="Abonements" asp-route-id="@one.Id"
+                               class="btn btn-primary text-light mt-2 col-md-12">@SharedStringRes.InfoBtn</a>
                         </div>
                     </div>
                 </div>

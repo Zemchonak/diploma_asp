@@ -1,6 +1,7 @@
 ﻿using FitnessCenterManagement.WebApp.Helpers;
 using FitnessCenterManagement.WebApp.HttpClients.Interfaces;
 using FitnessCenterManagement.WebApp.Models;
+using FitnessCenterManagement.WebApp.Views.Shared.Resources;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -28,10 +29,84 @@ namespace FitnessCenterManagement.WebApp.Controllers
         {
             var response = await _api.GetAbonements();
 
-            var model = await JsonHelper.DeserializeContentAsync<IReadOnlyCollection<AbonementModel>>(response);
+            var model = await JsonHelper.DeserializeContentAsync<List<AbonementModel>>(response);
+
+            for (int i = 0; i < model.Count; i++)
+            {
+                model[i].Cost = await JsonHelper.DeserializeContentAsync<decimal>(await _api.GetAbonementsPrice(model[i].Id));
+            }
 
             return View(model);
         }
+
+        [AllowAnonymous]
+        [HttpGet("{id}/fitnessEvents")]
+        public async Task<IActionResult> Index([FromRoute] int id)
+        {
+            var response = await _api.GetAbonementFitnessEventsByAbonement(id);
+
+            var model = await JsonHelper.DeserializeContentAsync<List<AbonementFitnessEventModel>>(response);
+
+            return new JsonResult(model.Select(m => m.FitnessEventId).ToArray());
+        }
+
+        [AllowAnonymous]
+        [HttpGet("{id}/price")]
+        public async Task<IActionResult> GetAbonementsPrice([FromRoute] int id)
+        {
+            var response = await JsonHelper.DeserializeContentAsync<decimal>(await _api.GetAbonementsPrice(id));
+
+            return new JsonResult(response);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Info([FromRoute] int id)
+        {
+            var response = await _api.GetAbonements(id);
+
+            var abonementModel = await JsonHelper.DeserializeContentAsync<AbonementModel>(response);
+
+            var abonementFitnessEvents = await JsonHelper.DeserializeContentAsync<IReadOnlyCollection<AbonementFitnessEventModel>>(await _api.GetAbonementFitnessEventsByAbonement(abonementModel.Id));
+            var events = (await JsonHelper.DeserializeContentAsync<IReadOnlyCollection<FitnessEventModel>>(await _api.GetFitnessEvents()))
+                .Where(f => abonementFitnessEvents.Any(item => item.FitnessEventId == f.Id)).ToList();
+
+            var fitnessEvents = new List<(int, FitnessEventModel)>();
+
+            foreach (var one in events)
+            {
+                var venueResponse = await _api.GetVenues(one.VenueId);
+                var venue = await JsonHelper.DeserializeContentAsync<VenueModel>(venueResponse);
+                var serviceResponse = await _api.GetServices(one.ServiceId);
+                var service = await JsonHelper.DeserializeContentAsync<ServiceModel>(serviceResponse);
+
+                fitnessEvents.Add((abonementFitnessEvents.First(e => e.FitnessEventId == one.Id).Id, new FitnessEventModel
+                {
+                    Id = one.Id,
+                    Minutes = one.Minutes,
+                    VenueId = one.VenueId,
+                    ServiceId = one.ServiceId,
+                    VenueInfo = $"{venue.Name} ({venue.Location})",
+                    ServiceInfo = $"{service.Name}",
+                }));
+            }
+
+            var model = new AbonementOwnFitnessEventsModel()
+            {
+                Id = abonementModel.Id,
+                Attendances = abonementModel.Attendances,
+                Coefficient = abonementModel.Coefficient,
+                ImageName = abonementModel.ImageName,
+                Name = abonementModel.Name,
+                Status = abonementModel.Status,
+                FitnessEvents = fitnessEvents,
+            };
+
+            model.Cost = await JsonHelper.DeserializeContentAsync<decimal>(await _api.GetAbonementsPrice(model.Id));
+
+            return View(model);
+        }
+
 
         [Authorize(Roles = Constants.ManagerRole)]
         [HttpGet("manage")]
@@ -46,8 +121,9 @@ namespace FitnessCenterManagement.WebApp.Controllers
 
         [Authorize(Roles = Constants.ManagerRole)]
         [HttpGet("create")]
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
+
             return View();
         }
 
@@ -137,7 +213,7 @@ namespace FitnessCenterManagement.WebApp.Controllers
 
         [Authorize(Roles = Constants.ManagerRole)]
         [HttpGet("{id}/image/change")]
-        public async Task<IActionResult> ChangeImage([FromRoute] int id)
+        public IActionResult ChangeImage([FromRoute] int id)
         {
             var model = new ImageUploadModel { Id = id };
             return View(model);
@@ -181,19 +257,78 @@ namespace FitnessCenterManagement.WebApp.Controllers
                 switch (responseContent.Status)
                 {
                     case AbonementStatus.Disabled:
-                    {
-                        responseContent.Status = AbonementStatus.Enabled;
-                        break;
-                    }
+                        {
+                            responseContent.Status = AbonementStatus.Enabled;
+                            break;
+                        }
                     default:
-                    {
-                        responseContent.Status = AbonementStatus.Disabled;
-                        break;
-                    }
+                        {
+                            responseContent.Status = AbonementStatus.Disabled;
+                            break;
+                        }
                 }
                 await _api.PutAbonements(responseContent.Id, JsonHelper.ObjectToStringContent(responseContent));
             }
             return RedirectToAction("manage");
+        }
+
+        [Authorize(Roles = Constants.ManagerRole)]
+        [HttpGet("{id}/createEvent")]
+        public IActionResult CreateEvent([FromRoute] int id)
+        {
+            var model = new AbonementFitnessEventModel { AbonementId = id };
+
+            return View(model);
+        }
+
+        [Authorize(Roles = Constants.ManagerRole)]
+        [HttpPost("{id}/createEvent")]
+        public async Task<IActionResult> Create([FromRoute] int id, AbonementFitnessEventModel model)
+        {
+            var response = await _api.PostAbonementFitnessEvents(JsonHelper.ObjectToStringContent(model));
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Info", new { id = model.AbonementId });
+            }
+
+            var content = await JsonHelper.DeserializeContentAsync<ErrorViewModel>(response);
+            ModelState.AddModelError(content.ErrorAttribute, content.ErrorMessage);
+            return View(model);
+        }
+
+        [Authorize(Roles = Constants.ManagerRole)]
+        [HttpGet("{id}/removeEvent/{eventId}")]
+        public async Task<IActionResult> RemoveEvent([FromRoute] int id, [FromRoute] int eventId)
+        {
+            var abonementsResponse = await _api.GetAbonements(id);
+            var abonement = await JsonHelper.DeserializeContentAsync<AbonementOwnFitnessEventsModel>(abonementsResponse);
+            var abonementsFitnessEventsResponse = await _api.GetAbonementFitnessEvents(eventId);
+            var abonementEvent = await JsonHelper.DeserializeContentAsync<AbonementFitnessEventModel>(abonementsFitnessEventsResponse);
+
+            var fitnessEventResponse = await _api.GetFitnessEvents(abonementEvent.FitnessEventId);
+            var fitnessEvent = await JsonHelper.DeserializeContentAsync<FitnessEventModel>(fitnessEventResponse);
+            var service = await JsonHelper.DeserializeContentAsync<ServiceModel>(await _api.GetServices(fitnessEvent.ServiceId));
+            fitnessEvent.ServiceInfo = $"{service.Name} ({SharedStringRes.CurrencySymbol}{service.Price})";
+            var venue = (await JsonHelper.DeserializeContentAsync<VenueModel>(await _api.GetVenues(fitnessEvent.VenueId)));
+            fitnessEvent.VenueInfo = $"{venue.Name} ({venue.Location})";
+
+            abonement.FitnessEvents = new List<(int, FitnessEventModel)> { (eventId, fitnessEvent) };
+            return View(abonement);
+        }
+
+        [HttpGet("confirmRemoveEvent/{id}")]
+        public async Task<IActionResult> ConfirmedRemoveEvent([FromRoute] int id)
+        {
+            var fitevent = await JsonHelper.DeserializeContentAsync<AbonementFitnessEventModel>(await _api.GetAbonementFitnessEvents(id));
+            var response = await _api.DeleteAbonementFitnessEvents(id);
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Info", new { id = fitevent.AbonementId });
+            }
+
+            var responseContent = await JsonHelper.DeserializeContentAsync<ErrorViewModel>(response);
+            ViewBag.ErrorMessage = responseContent.ErrorMessage;
+            return RedirectToAction("RemoveEvent", new { id });
         }
     }
 }

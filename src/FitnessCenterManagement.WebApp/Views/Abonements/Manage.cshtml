@@ -53,9 +53,9 @@
 
                                     @if (isManager)
                                     {
-                                        <td class="align-middle"><a href="/Abonements/@one.Id/image/change" class="btn btn-outline-primary"><i class="fas fa-image fa-1x"/></a></td>
-                                        <td class="align-middle"><a href="/Abonements/edit/@one.Id" class="btn btn-outline-primary"><i class="fas fa-pencil-alt fa-1x"/></a></td>
-                                        <td class="align-middle"><a href="/Abonements/remove/@one.Id" class="btn btn-outline-danger"><i class="fas fa-times fa-1x"/></a></td>
+                                        <td class="align-middle"><a href="/Abonements/@one.Id/image/change" class="btn btn-outline-primary"><i class="fas fa-image fa-1x" /></a></td>
+                                        <td class="align-middle"><a href="/Abonements/edit/@one.Id" class="btn btn-outline-primary"><i class="fas fa-pencil-alt fa-1x" /></a></td>
+                                        <td class="align-middle"><a href="/Abonements/remove/@one.Id" class="btn btn-outline-danger"><i class="fas fa-times fa-1x" /></a></td>
                                     }
                                 </tr>
                             }
@@ -67,6 +67,7 @@
     </fieldset>
 </div>
 <br />
+@await Html.PartialAsync("_ReturnGrayButton", ("Index", "Abonements", SharedStringRes.GoBackBtn))
 
 
 @{

@@ -1,5 +1,7 @@
 ﻿using FitnessCenterManagement.WebApp.Attributes;
 using FitnessCenterManagement.WebApp.Views.Abonements.Resources;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace FitnessCenterManagement.WebApp.Models
@@ -29,5 +31,12 @@ namespace FitnessCenterManagement.WebApp.Models
         public AbonementStatus Status { get; set; }
 
         public string ImageName { get; set; }
+
+        public decimal Cost { get; set; }
+    }
+
+    public class AbonementOwnFitnessEventsModel : AbonementModel
+    {
+        public IEnumerable<(int, FitnessEventModel)> FitnessEvents { get; set; }
     }
 }
