@@ -21,6 +21,37 @@ namespace FitnessCenterManagement.WebApp.Controllers
             _api = api;
         }
 
+        [AllowAnonymous]
+        [HttpGet("items")]
+        public async Task<IActionResult> GetAllFitnessEvents()
+        {
+            var response = await _api.GetFitnessEvents();
+
+            var content = await JsonHelper.DeserializeContentAsync<IReadOnlyCollection<FitnessEventModel>>(response);
+
+            var model = new List<FitnessEventModel>();
+
+            foreach (var one in content)
+            {
+                var venueResponse = await _api.GetVenues(one.VenueId);
+                var venue = await JsonHelper.DeserializeContentAsync<VenueModel>(venueResponse);
+                var serviceResponse = await _api.GetServices(one.ServiceId);
+                var service = await JsonHelper.DeserializeContentAsync<ServiceModel>(serviceResponse);
+
+                model.Add(new FitnessEventModel
+                {
+                    Id = one.Id,
+                    Minutes = one.Minutes,
+                    VenueId = one.VenueId,
+                    ServiceId = one.ServiceId,
+                    VenueInfo = $"{venue.Name} ({venue.Location})",
+                    ServiceInfo = $"{service.Name} ({SharedStringRes.CurrencySymbol}{service.Price})",
+                });
+            }
+
+            return new JsonResult(model.AsReadOnly());
+        }
+
         [HttpGet("")]
         public async Task<IActionResult> Index()
         {
@@ -52,7 +83,7 @@ namespace FitnessCenterManagement.WebApp.Controllers
         }
 
         [HttpGet("create")]
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             return View();
         }
@@ -103,7 +134,7 @@ namespace FitnessCenterManagement.WebApp.Controllers
             var response = await _api.GetFitnessEvents(id);
             var model = await JsonHelper.DeserializeContentAsync<FitnessEventModel>(response);
             var service = await JsonHelper.DeserializeContentAsync<ServiceModel>(await _api.GetServices(model.ServiceId));
-            model.ServiceInfo = $"{service.Name} ({SharedStringRes.CurrencySymbol}{service.Price})";
+            model.ServiceInfo = $"{service.Name} ({SharedStringRes.CurrencySymbol}{service.Price})"; 
             var venue = (await JsonHelper.DeserializeContentAsync<VenueModel>(await _api.GetVenues(model.VenueId)));
             model.VenueInfo = $"{venue.Name} ({venue.Location})";
             return View(model);

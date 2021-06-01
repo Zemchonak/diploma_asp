@@ -31,7 +31,7 @@ namespace FitnessCenterManagement.WebApp.Controllers
         }
 
         [HttpGet("create")]
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             var model = new CustomerCategoriesEditModel();
             return View(model);

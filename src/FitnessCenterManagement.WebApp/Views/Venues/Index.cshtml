@@ -55,14 +55,14 @@
                                     {
                                         <td class="align-middle"><a href="/Venues/@one.Id/qr"><img src="/Venues/@one.Id/qr" style="width:240px; height:240px"></a></td>
                                     }
-                                    <td class="align-middle"><img src="/Venues/@one.Id/image" style="width:320px; height:240px"></td>
-                                    <td>@one.Name </td>
-                                    <td>@one.Location</td>
+                                    <td class="text-center align-middle"><img src="/Venues/@one.Id/image" style="width:320px; height:240px"></td>
+                                    <td class="text-center align-middle">@one.Name </td>
+                                    <td class="text-center align-middle">@one.Location</td>
                                     @if (isManager)
                                     {
-                                <td class="align-middle"> <a href="Venues/@one.Id/image/change" class="btn btn-outline-primary"><i class="fas fa-image fa-1x"></i></a></td>
-                                        <td class="align-middle"> <a href="Venues/edit/@one.Id" class="btn btn-outline-primary"><i class="fas fa-pencil-alt fa-1x"></i></a></td>
-                                        <td class="align-middle"> <a href="Venues/remove/@one.Id" class="btn btn-outline-danger"><i class="fas fa-times fa-1x"></i></a> </td>
+                                        <td class="text-center align-middle"> <a href="Venues/@one.Id/image/change" class="btn btn-outline-primary"><i class="fas fa-image fa-1x"></i></a></td>
+                                        <td class="text-center align-middle"> <a href="Venues/edit/@one.Id" class="btn btn-outline-primary"><i class="fas fa-pencil-alt fa-1x"></i></a></td>
+                                        <td class="text-center align-middle"> <a href="Venues/remove/@one.Id" class="btn btn-outline-danger"><i class="fas fa-times fa-1x"></i></a> </td>
                                     }
                                 </tr>
                             }
@@ -124,7 +124,10 @@
                     "aria": {
                         "sortAscending": '@tableLocalization["ascText"]',
                         "sortDescending": '@tableLocalization["descText"]',
-                    }
+                    },
+                    "columnDefs": [
+
+                    ]
                 }
             });
         });

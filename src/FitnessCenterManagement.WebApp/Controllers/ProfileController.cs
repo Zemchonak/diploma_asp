@@ -98,7 +98,7 @@ namespace FitnessCenterManagement.WebApp.Controllers
 
         [Authorize]
         [HttpGet("avatar/change")]
-        public async Task<IActionResult> ChangeAvatar([FromRoute] string userId)
+        public IActionResult ChangeAvatar([FromRoute] string userId)
         {
             return View();
         }

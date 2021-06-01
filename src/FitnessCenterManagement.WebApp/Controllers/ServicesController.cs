@@ -40,7 +40,7 @@ namespace FitnessCenterManagement.WebApp.Controllers
 
         [Authorize(Roles = Constants.MarketerRole)]
         [HttpGet("create")]
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             return View();
         }

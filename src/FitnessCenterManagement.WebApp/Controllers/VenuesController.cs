@@ -44,7 +44,7 @@ namespace FitnessCenterManagement.WebApp.Controllers
 
         [Authorize(Roles = Constants.ManagerRole)]
         [HttpGet("create")]
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             return View();
         }
@@ -135,7 +135,7 @@ namespace FitnessCenterManagement.WebApp.Controllers
 
         [Authorize(Roles = Constants.ManagerRole)]
         [HttpGet("{id}/image/change")]
-        public async Task<IActionResult> ChangeImage([FromRoute] int id)
+        public IActionResult ChangeImage([FromRoute] int id)
         {
             var model = new ImageUploadModel { Id = id };
             return View(model);
