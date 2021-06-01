@@ -124,6 +124,15 @@ namespace FitnessCenterManagement.WebApp.Views.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Buy.
+        /// </summary>
+        public static string BuyBtn {
+            get {
+                return ResourceManager.GetString("BuyBtn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change.
         /// </summary>
         public static string ChangeText {
@@ -265,6 +274,15 @@ namespace FitnessCenterManagement.WebApp.Views.Shared.Resources {
         public static string GoBackBtn {
             get {
                 return ResourceManager.GetString("GoBackBtn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Details.
+        /// </summary>
+        public static string InfoBtn {
+            get {
+                return ResourceManager.GetString("InfoBtn", resourceCulture);
             }
         }
         

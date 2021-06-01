@@ -250,4 +250,10 @@
   <data name="ChangeText" xml:space="preserve">
     <value>Изменить</value>
   </data>
+  <data name="InfoBtn" xml:space="preserve">
+    <value>Подробнее</value>
+  </data>
+  <data name="BuyBtn" xml:space="preserve">
+    <value>Купить</value>
+  </data>
 </root>

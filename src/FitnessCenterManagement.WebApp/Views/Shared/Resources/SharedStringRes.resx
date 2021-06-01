@@ -250,4 +250,10 @@ Gomel, Rechitsky prospect, 135</value>
   <data name="ChangeText" xml:space="preserve">
     <value>Change</value>
   </data>
+  <data name="InfoBtn" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="BuyBtn" xml:space="preserve">
+    <value>Buy</value>
+  </data>
 </root>
