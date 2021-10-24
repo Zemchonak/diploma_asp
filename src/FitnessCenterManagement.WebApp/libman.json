@@ -9,6 +9,10 @@
     {
       "library": "OwlCarousel2@2.3.4",
       "destination": "wwwroot/lib/OwlCarousel2/"
+    },
+    {
+      "library": "aspnet-signalr@1.0.27",
+      "destination": "wwwroot/lib/aspnet-signalr/"
     }
   ]
 }

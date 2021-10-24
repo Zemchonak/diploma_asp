@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace FitnessCenterManagement.WebApp.Controllers
 {
-    [Authorize(Roles = Constants.ManagerRole)]
     [Route("[controller]")]
     public class FitnessEventsController : Controller
     {
@@ -23,13 +22,28 @@ namespace FitnessCenterManagement.WebApp.Controllers
 
         [AllowAnonymous]
         [HttpGet("items")]
-        public async Task<IActionResult> GetAllFitnessEvents()
+        public async Task<IActionResult> GetFitnessEvents(int id = 0)
         {
-            var response = await _api.GetFitnessEvents();
+            if (id < 0) return NotFound();
+
+            var response = id == 0 ?
+                await _api.GetFitnessEvents() :
+                await _api.GetFitnessEvents(id);
+
+            if (id != 0)
+            {
+                var model = await JsonHelper.DeserializeContentAsync<FitnessEventModel>(response);
+                var venueResponse = await _api.GetVenues(model.VenueId);
+                var venue = await JsonHelper.DeserializeContentAsync<VenueModel>(venueResponse);
+                var serviceResponse = await _api.GetServices(model.ServiceId);
+                var service = await JsonHelper.DeserializeContentAsync<ServiceModel>(serviceResponse);
+                model.VenueInfo = $"{venue.Name} ({venue.Location})";
+                model.ServiceInfo = $"{service.Name} ({SharedStringRes.CurrencySymbol}{service.Price})";
+                return new JsonResult(model);
+            }
 
             var content = await JsonHelper.DeserializeContentAsync<IReadOnlyCollection<FitnessEventModel>>(response);
-
-            var model = new List<FitnessEventModel>();
+            var list = new List<FitnessEventModel>();
 
             foreach (var one in content)
             {
@@ -38,7 +52,7 @@ namespace FitnessCenterManagement.WebApp.Controllers
                 var serviceResponse = await _api.GetServices(one.ServiceId);
                 var service = await JsonHelper.DeserializeContentAsync<ServiceModel>(serviceResponse);
 
-                model.Add(new FitnessEventModel
+                list.Add(new FitnessEventModel
                 {
                     Id = one.Id,
                     Minutes = one.Minutes,
@@ -49,9 +63,10 @@ namespace FitnessCenterManagement.WebApp.Controllers
                 });
             }
 
-            return new JsonResult(model.AsReadOnly());
+            return new JsonResult(list.AsReadOnly());
         }
 
+        [Authorize(Roles = Constants.ManagerRole)]
         [HttpGet("")]
         public async Task<IActionResult> Index()
         {
@@ -82,12 +97,14 @@ namespace FitnessCenterManagement.WebApp.Controllers
             return View(model.AsReadOnly());
         }
 
+        [Authorize(Roles = Constants.ManagerRole)]
         [HttpGet("create")]
         public IActionResult Create()
         {
             return View();
         }
 
+        [Authorize(Roles = Constants.ManagerRole)]
         [HttpPost("create")]
         public async Task<IActionResult> Create(FitnessEventModel model)
         {
@@ -102,6 +119,7 @@ namespace FitnessCenterManagement.WebApp.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = Constants.ManagerRole)]
         [HttpGet("edit/{id}")]
         public async Task<IActionResult> Update([FromRoute] int id)
         {
@@ -114,6 +132,7 @@ namespace FitnessCenterManagement.WebApp.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = Constants.ManagerRole)]
         [HttpPost("edit")]
         public async Task<IActionResult> Update(FitnessEventModel model)
         {
@@ -128,6 +147,7 @@ namespace FitnessCenterManagement.WebApp.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = Constants.ManagerRole)]
         [HttpGet("remove/{id}")]
         public async Task<IActionResult> Remove([FromRoute] int id)
         {
@@ -140,6 +160,7 @@ namespace FitnessCenterManagement.WebApp.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = Constants.ManagerRole)]
         [HttpGet("confirmRemove/{id}")]
         public async Task<IActionResult> ConfirmedRemove([FromRoute] int id)
         {

@@ -582,5 +582,48 @@ namespace FitnessCenterManagement.WebApp.HttpClients
             var result = await Client.DeleteAsync(SetRequestPath($"AbonementFitnessEvents/{id}"));
             return result;
         }
+
+        // WEEKLY EVENTS
+
+        public async Task<HttpResponseMessage> GetWeeklyEvents(string part)
+        {
+            var reqPath = "WeeklyEvents";
+            if (!string.IsNullOrEmpty(part))
+            {
+                reqPath += $"?part={part}";
+            }
+            RequestHelper.SetRequestToken(Client, HttpContextAccessor);
+            var result = await Client.GetAsync(SetRequestPath(reqPath));
+            return result;
+        }
+
+        public async Task<HttpResponseMessage> GetWeeklyEvents(int id)
+        {
+            RequestHelper.SetRequestToken(Client, HttpContextAccessor);
+            var result = await Client.GetAsync(SetRequestPath($"WeeklyEvents/{id}"));
+            return result;
+        }
+
+        public async Task<HttpResponseMessage> PutWeeklyEvents(int id, StringContent content)
+        {
+            RequestHelper.SetRequestToken(Client, HttpContextAccessor);
+            var result = await Client.PutAsync(SetRequestPath($"WeeklyEvents/{id}"), content);
+            return result;
+        }
+
+        public async Task<HttpResponseMessage> PostWeeklyEvents(StringContent content)
+        {
+            RequestHelper.SetRequestToken(Client, HttpContextAccessor);
+            var result = await Client.PostAsync(SetRequestPath($"WeeklyEvents/"), content);
+            return result;
+        }
+
+        public async Task<HttpResponseMessage> DeleteWeeklyEvents(int id)
+        {
+            RequestHelper.SetRequestToken(Client, HttpContextAccessor);
+            var result = await Client.DeleteAsync(SetRequestPath($"WeeklyEvents/{id}"));
+            return result;
+        }
+
     }
 }

@@ -12,7 +12,8 @@ namespace FitnessCenterManagement.WebApp.HttpClients.Interfaces
         ITrainersApiHttpClient,
         IAbonementsApiHttpClient,
         IFitnessEventsApiHttpClient,
-        IAbonementFitnessEventsApiHttpClient
+        IAbonementFitnessEventsApiHttpClient,
+        IWeeklyEventsApiHttpClient
     {
         // Users
         public Task<HttpResponseMessage> Ping();

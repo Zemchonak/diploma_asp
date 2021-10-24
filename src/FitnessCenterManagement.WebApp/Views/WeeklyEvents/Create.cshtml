@@ -1,0 +1,226 @@
+﻿@using FitnessCenterManagement.WebApp.Views.Shared.Resources
+@using FitnessCenterManagement.WebApp.Views.Shared.Resources
+@using FitnessCenterManagement.WebApp.Views.WeeklyEvents.Resources
+@model FitnessCenterManagement.WebApp.Models.WeeklyEventModel
+@{
+    ViewData["Title"] = WeeklyEventsRes.CreateNewItem;
+}
+
+<h2>@ViewData["Title"]</h2>
+<hr />
+<div class="container">
+    <br />
+    <div class="timetable"></div>
+</div>
+<hr />
+
+<form asp-controller="WeeklyEvents" asp-action="create" asp-antiforgery="true" method="post">
+    <div class="validation" asp-validation-summary="ModelOnly"></div>
+    <input asp-for="Id" hidden="hidden" />
+
+    <div class="form-group row">
+        <label asp-for="DayOfWeek" class="col-md-2 control-label"></label>
+        <div class="col-sm-9">
+            <select asp-for="DayOfWeek" onchange="dayDropdownChanged(this)" class="form-control">
+                <option value="" id="dropDownServicesChooseValue" disabled="disabled" selected="selected">@SharedStringRes.ChooseDropdownHint</option>
+                <option value="1">@WeekDays.Monday</option>
+                <option value="2">@WeekDays.Tuesday</option>
+                <option value="3">@WeekDays.Wednesday</option>
+                <option value="4">@WeekDays.Thursday</option>
+                <option value="5">@WeekDays.Friday</option>
+                <option value="6">@WeekDays.Saturday</option>
+                <option value="7">@WeekDays.Sunday</option>
+            </select>
+        </div>
+        <div class="col-sm-1">
+            <a id="reloadBtn" class="btn btn-outline-danger" onclick="redrawBtnClick()" style="display:none"><i class="fas fa-sync"></i></a>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="FitnessEventId" class="col-md-2 control-label"></label>
+        <div class="col-sm-10">
+            <select asp-for="FitnessEventId" class="form-control">
+                <option value="" id="dropDownServicesChooseValue" disabled="disabled" selected="selected">@SharedStringRes.ChooseDropdownHint</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="Time" class="col-md-2 control-label"></label>
+        <div class="col-sm-10">
+            <input capture asp-for="Time" class="timepicker form-control" , placeholder="@WeeklyEventsRes.TimeLabel" />
+            <span asp-validation-for="Time" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="VisitorCapacity" class="col-md-2 control-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="VisitorCapacity" class="form-control" , placeholder="@WeeklyEventsRes.VisitorsLabel" />
+            <span asp-validation-for="VisitorCapacity" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <input type="submit" class="btn btn-primary btn-icon" value="@SharedStringRes.CreateBtn" />
+        </div>
+    </div>
+</form>
+
+
+@await Html.PartialAsync("_ReturnGrayButton", ("Index", "WeeklyEvents", SharedStringRes.GoBackBtn))
+
+@section Scripts{
+    <script src="~/js/timetable.js"></script>
+    <link rel="stylesheet" href="~/css/timetablejs.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+    <script>
+        const reloadTimetableBtn =
+            document.getElementById("reloadBtn");
+        const dayDropdown =
+            document.getElementsByTagName("select")[0];
+        const fitnessEventsDropdown =
+            document.getElementsByTagName("select")[1];
+
+        function timePattern(time) {
+            return time.match(/(\d{4})-(\d{2})-(\d{2})[T](\d{2}):(\d{2}):(\d{2})[+](\d{2}):(\d{2})/);
+        }
+
+        $(document).ready(fetchFitnessEvents());
+
+        function fetchFitnessEvents() {
+            var dropdownElement = fitnessEventsDropdown.children[0];
+            $.ajax({
+                type: 'GET',
+                url: '/FitnessEvents/items',
+                error: function (error) {
+                    console.log('Error with receiving FitnessEvents data: ' + error)
+                },
+                success: function (result) {
+                    let s = '';
+                    if (result.length > 0) {
+                        for (let el of result) {
+                            s += '<option value="' + el.id + '">' + el.serviceInfo + ' - ' + el.venueInfo + ' ' + ' (' + el.minutes + ' min)</option>';
+                        }
+                    }
+                    $(dropdownElement).after(s);
+                }
+            });
+        };
+
+        $('.timepicker').timepicker({
+            timeFormat: '@SharedStringRes.TimeFormat',
+            interval: 5,
+            minTime: '@SharedStringRes.MinTime',
+            maxTime: '@SharedStringRes.MaxTime',
+            defaultTime: '@SharedStringRes.CurTime',
+            startTime: '@SharedStringRes.CurTime',
+            dynamic: true,
+            dropdown: true,
+            scrollbar: true
+        });
+
+        function redrawTimetable() {
+            var renderer = new Timetable.Renderer(timetable);
+            renderer.draw('.timetable');
+        }
+
+        function fetchVenues(timetableObj) {
+            $.ajax({
+                type: 'GET',
+                url: '/Venues/names',
+                error: function (error) {
+                    console.log('Error with receiving Venues data: ' + error);
+                },
+                success: function (result) {
+                    timetableObj.locations = result;
+                }
+            });
+        }
+
+        function fetchEvents(dayNo) {
+            var retValue = [];
+            $.ajax({
+                type: 'GET',
+                url: '/WeeklyEvents/findByDay/' + dayNo,
+                error: function (error) {
+                    console.log('Error with receiving Venues data: ' + error);
+                },
+                success: function (result) {
+                    let arr = [];
+                    for (let one of result) {
+                        retValue.push(one);
+                    }
+                }
+            });
+            return retValue;
+        }
+
+        function fetchTimetable(weeklyEvents) {
+            for (let one of weeklyEvents) {
+                let t = timePattern(one.time)
+                timetable.addEvent(one.fitnessEventInfo, one.location, new Date(2021, 5, 20, t[4], t[5]), new Date(2021, 5, 20, 12, 00), {
+                    url: '#',
+                    class: 'bg-warning',
+                    data: {
+                        id: 4,
+                        ticketType: 'VIP'
+                    },
+                    onClick: function (event, timetable, clickEvent) { }
+                });
+            }
+        }
+
+        var timetable;
+        var venues;
+
+        function redrawBtnClick() {
+            reloadTimetableBtn.style.display = 'none';
+            redrawTimetable();
+        }
+
+        function refetchTimetable() {
+            let selectedDay = dayDropdown.selectedIndex;
+            timetable = new Timetable();
+            fetchVenues(timetable);
+
+            // FORMAT
+            if ('@SharedStringRes.TimeFormat' == 'hh:mm p') {
+                timetable.useTwelveHour();
+            }
+            timetable.setScope(9, 23);
+            let weeklyEvents = fetchEvents(selectedDay);
+
+            for (let one of weeklyEvents) {
+                console.log(one);
+            }
+            redrawTimetable();
+        }
+
+        function dayDropdownChanged(dropdownElement) {
+            let selectedDay = dropdownElement.selectedIndex;
+
+            timetable = new Timetable();
+            fetchVenues(timetable);
+
+            // FORMAT
+            if ('@SharedStringRes.TimeFormat' == 'hh:mm p') {
+                timetable.useTwelveHour();
+            }
+            timetable.setScope(9, 23);
+
+            let weeklyEvents = fetchEvents(selectedDay);
+
+            reloadTimetableBtn.style.display = "";
+
+            //timetable.addEvent("", "Зал гимнастики", new Date(2021, 5, 20, 00, 00), new Date(2021, 5, 20, 00, 01), null);
+
+            redrawTimetable(timetable);
+        }
+
+    </script>
+}

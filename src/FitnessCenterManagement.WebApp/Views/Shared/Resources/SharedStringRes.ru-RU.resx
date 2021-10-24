@@ -256,4 +256,22 @@
   <data name="BuyBtn" xml:space="preserve">
     <value>Купить</value>
   </data>
+  <data name="WeeklyEventsHeaderButton" xml:space="preserve">
+    <value>Еженедельные мероприятия</value>
+  </data>
+  <data name="DateEventsHeaderButton" xml:space="preserve">
+    <value>Датированные мероприятия</value>
+  </data>
+  <data name="TimeFormat" xml:space="preserve">
+    <value>HH:mm</value>
+  </data>
+  <data name="MinTime" xml:space="preserve">
+    <value>09:00</value>
+  </data>
+  <data name="MaxTime" xml:space="preserve">
+    <value>23:00</value>
+  </data>
+  <data name="CurTime" xml:space="preserve">
+    <value>11:00</value>
+  </data>
 </root>

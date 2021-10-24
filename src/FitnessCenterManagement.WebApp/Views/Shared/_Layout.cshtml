@@ -54,6 +54,8 @@
                                         @if (isManager)
                                         {
                                             @await Html.PartialAsync("_DropdownHeaderItem", ("fitnessEventsBtn", "Index", "FitnessEvents", "list-alt", SharedStringRes.EventsBtn))
+                                            @await Html.PartialAsync("_DropdownHeaderItem", ("weeklyEventsBtn", "Index", "WeeklyEvents", "calendar-week", SharedStringRes.WeeklyEventsHeaderButton))
+                                            @await Html.PartialAsync("_DropdownHeaderItem", ("weeklyEventsBtn", "Index", "WeeklyEvents", "calendar-day", SharedStringRes.DateEventsHeaderButton))
                                         }
                                         @if (isMarketer)
                                         {

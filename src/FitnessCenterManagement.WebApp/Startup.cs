@@ -43,6 +43,13 @@ namespace FitnessCenterManagement.WebApp
                 c.BaseAddress = new Uri(Configuration["ApiAddress"]);
             });
 
+            services.AddCors(
+            options => options.AddDefaultPolicy(builder =>
+                {
+                    builder.AllowAnyOrigin();
+                })
+            );
+
             services.AddMvc()
                 .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
                 .AddDataAnnotationsLocalization();
@@ -95,6 +102,8 @@ namespace FitnessCenterManagement.WebApp
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthentication();
             app.UseAuthorization();

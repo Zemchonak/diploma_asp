@@ -7,6 +7,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="5.0.6" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
 	<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
@@ -123,6 +124,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>SharedStringRes.resx</DependentUpon>
     </Compile>
+    <Compile Update="Views\Shared\Resources\WeekDays.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>WeekDays.resx</DependentUpon>
+    </Compile>
     <Compile Update="Views\Specializations\Resources\Specializations.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -137,6 +143,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>VenueRes.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Views\WeeklyEvents\Resources\WeeklyEventsRes.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>WeeklyEventsRes.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -280,6 +291,10 @@
     <EmbeddedResource Update="Views\Shared\Resources\SharedStringRes.ru-RU.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\Shared\Resources\WeekDays.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>WeekDays.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\Specializations\Resources\Specializations.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Specializations.Designer.cs</LastGenOutput>
@@ -291,6 +306,10 @@
     <EmbeddedResource Update="Views\Venues\Resources\VenueRes.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>VenueRes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\WeeklyEvents\Resources\WeeklyEventsRes.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>WeeklyEventsRes.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

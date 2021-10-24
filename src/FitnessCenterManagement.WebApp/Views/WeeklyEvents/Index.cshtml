@@ -26,12 +26,9 @@
                                 <th class="header">@ServicesRes.DescriptionLabel</th>
                                 <th class="header">@ServicesRes.SpecializationLabel</th>
                                 <th class="header">@ServicesRes.PriceLabel</th>
-                                @if (isMarketer)
-                                {
-                                    <th data-orderable="false"></th>
-                                    <th data-orderable="false"></th>
-                                }
-                                </tr>
+                                <th data-orderable="false"></th>
+                                <th data-orderable="false"></th>
+                            </tr>
                         </thead>
                         <tbody>
                             @foreach (var one in Model)
@@ -43,8 +40,13 @@
                                     <td>@one.Price</td>
                                     @if (isMarketer)
                                     {
-                                        <td class="text-center"><a asp-action="edit" asp-controller="Services" asp-route-id="@one.Id" class="btn btn-outline-primary col-md-6"><i class="fas fa-pencil-alt"/></a></td>
+                                        <td class="text-center"><a asp-action="edit" asp-controller="Services" asp-route-id="@one.Id" class="btn btn-outline-primary col-md-6"><i class="fas fa-pencil-alt" /></a></td>
                                         <td class="text-center"><a asp-action="remove" asp-controller="Services" asp-route-id="@one.Id" class="btn btn-outline-danger"><i class="fas fa-times"></i></a></td>
+                                    }
+                                    else
+                                    {
+                                        <td></td>
+                                        <td></td>
                                     }
                                 </tr>
                             }
@@ -106,13 +108,8 @@
                     "aria": {
                         "sortAscending": '@tableLocalization["ascText"]',
                         "sortDescending": '@tableLocalization["descText"]',
-                    },
-                },
-                "columnDefs": [
-                    { "width": "20%", "targets": 0 },
-                    { "width": "10%", "targets": 2 },
-                    { "width": "9%", "targets": [3, 4, 5] }
-                ]
+                    }
+                }
             });
         });
     </script>

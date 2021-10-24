@@ -117,161 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ApplicationNameHalfOne" xml:space="preserve">
-    <value>FIT</value>
+  <data name="Friday" xml:space="preserve">
+    <value>Пятница</value>
   </data>
-  <data name="ErrorTitle" xml:space="preserve">
-    <value>Error</value>
+  <data name="Monday" xml:space="preserve">
+    <value>Понедельник</value>
   </data>
-  <data name="GoBackBtn" xml:space="preserve">
-    <value>Go back</value>
+  <data name="Saturday" xml:space="preserve">
+    <value>Суббота</value>
   </data>
-  <data name="LogInHeaderBtn" xml:space="preserve">
-    <value>Log in</value>
+  <data name="Sunday" xml:space="preserve">
+    <value>Воскресенье</value>
   </data>
-  <data name="LogOutHeaderBtn" xml:space="preserve">
-    <value>Log out</value>
+  <data name="Thursday" xml:space="preserve">
+    <value>Четверг</value>
   </data>
-  <data name="MyProfileHeaderBtn" xml:space="preserve">
-    <value>My profile</value>
+  <data name="Tuesday" xml:space="preserve">
+    <value>Вторник</value>
   </data>
-  <data name="RegisterHeaderBtn" xml:space="preserve">
-    <value>Register</value>
-  </data>
-  <data name="ReturnAfterErrorBtn" xml:space="preserve">
-    <value>Return</value>
-  </data>
-  <data name="UsersBtn" xml:space="preserve">
-    <value>Users</value>
-  </data>
-  <data name="SchedulesBtn" xml:space="preserve">
-    <value>Schedules</value>
-  </data>
-  <data name="VenuesBtn" xml:space="preserve">
-    <value>Venues</value>
-  </data>
-  <data name="ServicesBtn" xml:space="preserve">
-    <value>Services</value>
-  </data>
-  <data name="ReportsBtn" xml:space="preserve">
-    <value>Reports</value>
-  </data>
-  <data name="ApplicationNameHalfTwo" xml:space="preserve">
-    <value>PRO</value>
-  </data>
-  <data name="SocialsGetConnectedText" xml:space="preserve">
-    <value>Get connected with us on social networks</value>
-  </data>
-  <data name="ToClientsLabel" xml:space="preserve">
-    <value>For clients</value>
-  </data>
-  <data name="OurTrainersBtn" xml:space="preserve">
-    <value>Trainers</value>
-  </data>
-  <data name="ReviewsBtn" xml:space="preserve">
-    <value>Reviews</value>
-  </data>
-  <data name="FullPriceListFooterBtn" xml:space="preserve">
-    <value>Pricelist</value>
-  </data>
-  <data name="ContactFooterLabel" xml:space="preserve">
-    <value>Contact</value>
-  </data>
-  <data name="ContactAddress" xml:space="preserve">
-    <value>The Republic of Belarus, 
-Gomel, Rechitsky prospect, 135</value>
-  </data>
-  <data name="ContactPhone" xml:space="preserve">
-    <value>8 (123) 456 789 123</value>
-  </data>
-  <data name="ContactPhone2" xml:space="preserve">
-    <value>8 (000) 112 233 456</value>
-  </data>
-  <data name="ContactEmail" xml:space="preserve">
-    <value>support@fitpro.by</value>
-  </data>
-  <data name="MenuFooterLabel" xml:space="preserve">
-    <value>Menu</value>
-  </data>
-  <data name="LoyaltyProgramsBtn" xml:space="preserve">
-    <value>Loyalty programs</value>
-  </data>
-  <data name="AttentionWord" xml:space="preserve">
-    <value>Attention</value>
-  </data>
-  <data name="SearchBtn" xml:space="preserve">
-    <value>Search</value>
-  </data>
-  <data name="EditBtn" xml:space="preserve">
-    <value>Edit</value>
-  </data>
-  <data name="DeleteBtn" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="CreateBtn" xml:space="preserve">
-    <value>Create</value>
-  </data>
-  <data name="UpdateBtn" xml:space="preserve">
-    <value>Update</value>
-  </data>
-  <data name="CurrencySymbol" xml:space="preserve">
-    <value>$</value>
-  </data>
-  <data name="SpecializationBtn" xml:space="preserve">
-    <value>Specializations</value>
-  </data>
-  <data name="SaveBtnValue" xml:space="preserve">
-    <value>Save</value>
-  </data>
-  <data name="AdminFunctional" xml:space="preserve">
-    <value>Administrative</value>
-  </data>
-  <data name="EventsBtn" xml:space="preserve">
-    <value>Fitness events</value>
-  </data>
-  <data name="AbonementsBtn" xml:space="preserve">
-    <value>Abonements</value>
-  </data>
-  <data name="AboutFitnessCenterBtn" xml:space="preserve">
-    <value>Fitness center</value>
-  </data>
-  <data name="AboutUsBtn" xml:space="preserve">
-    <value>About us</value>
-  </data>
-  <data name="ChooseDropdownHint" xml:space="preserve">
-    <value>Choose...</value>
-  </data>
-  <data name="CustomerCategoriesBtn" xml:space="preserve">
-    <value>Customer categoeries</value>
-  </data>
-  <data name="ManageReviewsBtn" xml:space="preserve">
-    <value>Manage reviews...</value>
-  </data>
-  <data name="ChangeText" xml:space="preserve">
-    <value>Change</value>
-  </data>
-  <data name="InfoBtn" xml:space="preserve">
-    <value>Details</value>
-  </data>
-  <data name="BuyBtn" xml:space="preserve">
-    <value>Buy</value>
-  </data>
-  <data name="WeeklyEventsHeaderButton" xml:space="preserve">
-    <value>Weekly Events</value>
-  </data>
-  <data name="DateEventsHeaderButton" xml:space="preserve">
-    <value>Date Events</value>
-  </data>
-  <data name="TimeFormat" xml:space="preserve">
-    <value>hh:mm p</value>
-  </data>
-  <data name="MinTime" xml:space="preserve">
-    <value>9:00 am</value>
-  </data>
-  <data name="MaxTime" xml:space="preserve">
-    <value>11:00 pm</value>
-  </data>
-  <data name="CurTime" xml:space="preserve">
-    <value>11:00 am</value>
+  <data name="Wednesday" xml:space="preserve">
+    <value>Среда</value>
   </data>
 </root>

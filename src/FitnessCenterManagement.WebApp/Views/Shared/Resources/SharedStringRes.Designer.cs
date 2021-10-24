@@ -215,11 +215,29 @@ namespace FitnessCenterManagement.WebApp.Views.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 11:00 am.
+        /// </summary>
+        public static string CurTime {
+            get {
+                return ResourceManager.GetString("CurTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Customer categoeries.
         /// </summary>
         public static string CustomerCategoriesBtn {
             get {
                 return ResourceManager.GetString("CustomerCategoriesBtn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date Events.
+        /// </summary>
+        public static string DateEventsHeaderButton {
+            get {
+                return ResourceManager.GetString("DateEventsHeaderButton", resourceCulture);
             }
         }
         
@@ -323,11 +341,29 @@ namespace FitnessCenterManagement.WebApp.Views.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 11:00 pm.
+        /// </summary>
+        public static string MaxTime {
+            get {
+                return ResourceManager.GetString("MaxTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Menu.
         /// </summary>
         public static string MenuFooterLabel {
             get {
                 return ResourceManager.GetString("MenuFooterLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 9:00 am.
+        /// </summary>
+        public static string MinTime {
+            get {
+                return ResourceManager.GetString("MinTime", resourceCulture);
             }
         }
         
@@ -440,6 +476,15 @@ namespace FitnessCenterManagement.WebApp.Views.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to hh:mm p.
+        /// </summary>
+        public static string TimeFormat {
+            get {
+                return ResourceManager.GetString("TimeFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to For clients.
         /// </summary>
         public static string ToClientsLabel {
@@ -472,6 +517,15 @@ namespace FitnessCenterManagement.WebApp.Views.Shared.Resources {
         public static string VenuesBtn {
             get {
                 return ResourceManager.GetString("VenuesBtn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Weekly Events.
+        /// </summary>
+        public static string WeeklyEventsHeaderButton {
+            get {
+                return ResourceManager.GetString("WeeklyEventsHeaderButton", resourceCulture);
             }
         }
     }

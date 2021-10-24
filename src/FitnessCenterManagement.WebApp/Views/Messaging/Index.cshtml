@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "MSGS";
+    var userId = User.FindFirst("userId").Value;
+}
+
+<h2 id="pageTitle">@ViewBag.Title</h2>
+
+<a class="btn btn-primary" onclick="testClick1()"> to user </a>
+<hr />
+<a class="btn btn-primary" onclick="testClick2()"> to trainer </a>
+<div id="messageDiv" class="alert alert-secondary"></div>
+@section Scripts
+{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.15/signalr.min.js" 
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script type="text/javascript">
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("https://localhost:44310/messaging")
+            .configureLogging(signalR.LogLevel.Information)
+            .build();
+
+        connection.on('Receive', function (message) {
+            console.log("=== ");
+            console.log("SIGNALR " + message);
+            // console.log("FROM " + userName);
+            console.log("=== ");
+        });
+
+        connection.start().catch(err => console.error(err.toString()));
+
+        function testClick1() {
+            connection.invoke("SendMessage", "BLABLA", "user@mail.box",).catch(err => console.error(err.toString()));
+        }
+
+        function testClick2() {
+            connection.invoke("SendMessage", "trainer@mail.box", "HREEREOI").catch(err => console.error(err.toString()));
+        }
+    </script>
+}

@@ -1,0 +1,196 @@
+﻿@using FitnessCenterManagement.WebApp.Views.Shared.Resources
+@{
+    ViewData["Title"] = SharedStringRes.SchedulesBtn;
+}
+@section HeadLinks {
+    <link rel="stylesheet" href="css/timetablejs.css">
+}
+<h2>@SharedStringRes.SchedulesBtn</h2>
+
+<div class="container">
+    <br />
+    <h3 class="p-1">По дням недели</h3>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#monday">Понедельник</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#tuesday">Вторник</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#wednesday">Среда</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#thursday">Четверг</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#friday">Пятница</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#saturday">Суббота</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#sunday">Воскресенье</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane fade" id="monday">
+            md
+        </div>
+        <div class="tab-pane fade" id="tuesday">
+            tu
+        </div>
+        <div class="tab-pane fade" id="wednesday">
+            wd...
+        </div>
+        <div class="fade col-md-12 show active" id="thursday">
+            <div id="timetableDays" class="timetable col-md-12 mt-1 pt-1"></div>
+        </div>
+        <div class="tab-pane fade" id="friday">
+            fr...
+        </div>
+        <div class="tab-pane fade" id="saturday">
+            sat...
+        </div>
+        <div class="tab-pane fade" id="sunday">
+            sun...
+        </div>
+    </div>
+    <hr />
+    <h3 class="p-1">По датам</h3>
+    <div class="alert alert-primary">
+        <strong>Внимание! </strong> Для отменённых занятий все действующие записи отмененяются с сохранением остатка занятий.
+    </div>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link " data-toggle="tab" href="#0107">01.07 (вт)</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#0207">02.07 (ср)</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#0307">03.07 (чт)</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#0407">04.07 (пт)</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#0507">05.07 (сб)</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#0607">06.07 (вс)</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#0707">07.07 (пн)</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#0807">08.07 (вт)</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane fade" id="0107">
+            01.07 (вт)
+        </div>
+        <div class="tab-pane fade" id="0207">
+            02.07 (ср)
+        </div>
+        <div class="tab-pane fade" id="0307">
+            03.07 (чт)
+        </div>
+        <div class="tab-pane fade" id="0407">
+            04.07 (пт)
+        </div>
+        <div class="tab-pane fade show active" id="0507">
+            <br />
+            <div class="alert alert-warning">
+                <strong>Внимание! Занятие &laquoГимнастика&raquo у тренера Зотов И.П. 05.07 в 12:00-14:00 ОТМЕНЕНО.</strong>
+            </div>
+            <div class="alert alert-warning">
+                <strong>Внимание! Занятие &laquoПлавание&raquo у тренера Тихая Н.П. 05.07 в 17:00-20:00 ОТМЕНЕНО.</strong>
+            </div>
+            <div id="timetableDates" class="timetable col-md-12 mt-1 pt-1"></div>
+        </div>
+        <div class="tab-pane fade" id="0607">
+            06.07 (вс)
+        </div>
+        <div class="tab-pane fade" id="0707">
+            07.07 (пн)
+        </div>
+        <div class="tab-pane fade" id="0807">
+            08.07 (вт)
+        </div>
+    </div>
+
+</div>
+
+@section Scripts{
+    <script src="/js/timetable.js"></script>
+    <script>
+        var ongoingOptions = {
+            url: '#',
+            class: 'bg-primary border-secondary',
+            data: {
+                id: 4,
+                ticketType: 'VIP'
+            },
+            onClick: function (event, timetable, clickEvent) { }
+        };
+
+        var cancelledOptions = {
+            url: '#',
+            class: 'bg-danger border-secondary',
+            data: {
+                id: 4,
+                ticketType: 'VIP'
+            },
+            onClick: function (event, timetable, clickEvent) { }
+        };
+
+        var timetableDates = new Timetable();
+        timetableDates.setScope(7, 1)
+        timetableDates.addLocations(['Тренажёрный зал 1', 'Тренажёрный зал 2', 'Зал гимнастики', 'Бассейн']);
+
+        timetableDates.addEvent('Армрестлинг - Сергеенко С.П.', 'Тренажёрный зал 1', new Date(2021, 5, 20, 10, 00), new Date(2021, 5, 20, 13, 00), ongoingOptions);
+        timetableDates.addEvent('Армрестлинг - Юрьева И.Е.', 'Тренажёрный зал 1', new Date(2021, 5, 20, 13, 00), new Date(2021, 5, 20, 16, 00), ongoingOptions);
+        timetableDates.addEvent('Армрестлинг - Любина Ю.В.', 'Тренажёрный зал 1', new Date(2021, 5, 20, 16, 00), new Date(2021, 5, 20, 19, 00), ongoingOptions);
+        timetableDates.addEvent('Армрестлинг - Гулин Г.И.', 'Тренажёрный зал 1', new Date(2021, 5, 20, 19, 00), new Date(2021, 5, 20, 22, 00), ongoingOptions);
+        timetableDates.addEvent('Калланектика - Марчёнок Н.Е.', 'Тренажёрный зал 2', new Date(2021, 5, 20, 09, 00), new Date(2021, 5, 20, 10, 30), ongoingOptions);
+        timetableDates.addEvent('Калланектика - Сергеенко С.П.', 'Тренажёрный зал 2', new Date(2021, 5, 20, 10, 30), new Date(2021, 5, 20, 12, 00), ongoingOptions);
+        timetableDates.addEvent('Калланектика - Гуляева Е.В.', 'Тренажёрный зал 2', new Date(2021, 5, 20, 14, 00), new Date(2021, 5, 20, 15, 30), ongoingOptions);
+        timetableDates.addEvent('Гимнастика - Иванова Ю.А.', 'Зал гимнастики', new Date(2021, 5, 20, 10, 00), new Date(2021, 5, 20, 12, 00), ongoingOptions);
+        timetableDates.addEvent('Гимнастика - Зотов И.П.', 'Зал гимнастики', new Date(2021, 5, 20, 12, 00), new Date(2021, 5, 20, 14, 00), cancelledOptions);
+        timetableDates.addEvent('Гимнастика - Зенченко Ф.Е.', 'Зал гимнастики', new Date(2021, 5, 20, 14, 00), new Date(2021, 5, 20, 16, 00), ongoingOptions);
+        timetableDates.addEvent('Гимнастика - Иванова Ю.А.', 'Зал гимнастики', new Date(2021, 5, 20, 16, 00), new Date(2021, 5, 20, 18, 00), ongoingOptions);
+        timetableDates.addEvent('Плавание - Тихая Н.П.', 'Бассейн', new Date(2021, 5, 20, 10, 00), new Date(2021, 5, 20, 12, 00), ongoingOptions);
+        timetableDates.addEvent('Плавание - Тихая Н.П.', 'Бассейн', new Date(2021, 5, 20, 12, 00), new Date(2021, 5, 20, 14, 00), ongoingOptions);
+        timetableDates.addEvent('Обучение навыку плавания - Тихая Н.П.', 'Бассейн', new Date(2021, 5, 20, 14, 00), new Date(2021, 5, 20, 17, 00), ongoingOptions);
+        timetableDates.addEvent('Плавание - Тихая Н.П.', 'Бассейн', new Date(2021, 5, 20, 17, 00), new Date(2021, 5, 20, 20, 00), cancelledOptions);
+
+        var renderer = new Timetable.Renderer(timetableDates);
+        renderer.draw('#timetableDates');
+
+        var timetableDays = new Timetable();
+        timetableDays.setScope(7, 1)
+        timetableDays.addLocations(['Тренажёрный зал 1', 'Тренажёрный зал 2', 'Зал гимнастики', 'Бассейн']);
+
+        timetableDays.addEvent('Армрестлинг', 'Тренажёрный зал 1', new Date(2021, 5, 20, 10, 00), new Date(2021, 5, 20, 13, 00), ongoingOptions);
+        timetableDays.addEvent('Армрестлинг', 'Тренажёрный зал 1', new Date(2021, 5, 20, 13, 00), new Date(2021, 5, 20, 16, 00), ongoingOptions);
+        timetableDays.addEvent('Армрестлинг', 'Тренажёрный зал 1', new Date(2021, 5, 20, 16, 00), new Date(2021, 5, 20, 19, 00), ongoingOptions);
+        timetableDays.addEvent('Армрестлинг', 'Тренажёрный зал 1', new Date(2021, 5, 20, 19, 00), new Date(2021, 5, 20, 22, 00), ongoingOptions);
+        timetableDays.addEvent('Калланектика', 'Тренажёрный зал 2', new Date(2021, 5, 20, 09, 00), new Date(2021, 5, 20, 10, 30), ongoingOptions);
+        timetableDays.addEvent('Калланектика', 'Тренажёрный зал 2', new Date(2021, 5, 20, 10, 30), new Date(2021, 5, 20, 12, 00), ongoingOptions);
+        timetableDays.addEvent('Калланектика', 'Тренажёрный зал 2', new Date(2021, 5, 20, 14, 00), new Date(2021, 5, 20, 15, 30), ongoingOptions);
+        timetableDays.addEvent('Гимнастика', 'Зал гимнастики', new Date(2021, 5, 20, 10, 00), new Date(2021, 5, 20, 12, 00), ongoingOptions);
+        timetableDays.addEvent('Гимнастика', 'Зал гимнастики', new Date(2021, 5, 20, 12, 00), new Date(2021, 5, 20, 14, 00), ongoingOptions);
+        timetableDays.addEvent('Гимнастика', 'Зал гимнастики', new Date(2021, 5, 20, 14, 00), new Date(2021, 5, 20, 16, 00), ongoingOptions);
+        timetableDays.addEvent('Гимнастика', 'Зал гимнастики', new Date(2021, 5, 20, 16, 00), new Date(2021, 5, 20, 18, 00), ongoingOptions);
+        timetableDays.addEvent('Плавание', 'Бассейн', new Date(2021, 5, 20, 10, 00), new Date(2021, 5, 20, 12, 00), ongoingOptions);
+        timetableDays.addEvent('Плавание', 'Бассейн', new Date(2021, 5, 20, 12, 00), new Date(2021, 5, 20, 14, 00), ongoingOptions);
+        timetableDays.addEvent('Обучение навыку плавания', 'Бассейн', new Date(2021, 5, 20, 14, 00), new Date(2021, 5, 20, 17, 00), ongoingOptions);
+        timetableDays.addEvent('Плавание', 'Бассейн', new Date(2021, 5, 20, 17, 00), new Date(2021, 5, 20, 20, 00), ongoingOptions);
+
+        var rendererDates = new Timetable.Renderer(timetableDays);
+        rendererDates.draw('#timetableDays');
+
+    </script>
+}

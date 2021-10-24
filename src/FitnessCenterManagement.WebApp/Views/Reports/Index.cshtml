@@ -1,0 +1,191 @@
+﻿@using FitnessCenterManagement.WebApp.Views.Services.Resources
+@using FitnessCenterManagement.WebApp.Views.Shared.Resources
+@{
+    ViewData["Title"] = SharedStringRes.ReportsBtn;
+}
+<h2>@SharedStringRes.ReportsBtn</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 align-items-center">
+
+            <div id="chart1"></div>
+            <hr class="p-4" />
+            <div class="border-5 border-secondary" id="chart2"></div>
+            <div class="border-5 border-secondary" id="chart3"></div>
+            <div class="border-5 border-secondary" id="chart4"></div>
+            <div class="border-5 border-secondary" id="chart5"></div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="https://bootstraptema.ru/plugins/jquery/jquery-1.11.3.min.js"></script>
+    <script src="https://bootstraptema.ru/plugins/2016/shieldui/script.js"></script>
+    <script>
+        $(document).ready(function () {
+            buildFirst();
+            buildSecond();
+            build3();
+            build4();
+            build5();
+        });
+        function buildFirst() {
+            $("#chart1").shieldChart({
+                theme: "light",
+                seriesSettings: {
+                    line: {
+                        dataPointText: {
+                            enabled: true
+                        }
+                    }
+                },
+                chartLegend: {
+                    align: 'center',
+                    borderRadius: 2,
+                    borderWidth: 2,
+                    verticalAlign: 'top'
+                },
+                exportOptions: {
+                    print: true
+                },
+                axisX: {
+                    categoricalValues: ["Январь", "Февраль", "Март", "Апрель", "Май"]
+                },
+                axisY: {
+                    title: {
+                        text: "Куплено шт"
+                    }
+                },
+                primaryHeader: {
+                    text: "Покупка абонементов по месяцам"
+                },
+                dataSeries: [{
+                    seriesType: 'line',
+                    collectionAlias: 'Абонемент 1',
+                    data: [5,4,7,8,10]
+                }, {
+                    seriesType: 'line',
+                    collectionAlias: 'Абонемент 2',
+                    data: [7,10,8,11,12]
+                }, {
+                    seriesType: 'line',
+                    collectionAlias: 'Абонемент 3',
+                    data: [3,5,6,1,4]
+                }]
+            });
+        };
+        function buildSecond() {
+            $("#chart2").shieldChart({
+                theme: "light",
+                primaryHeader: {
+                    text: "Статистика проданных абонементов"
+                },
+                exportOptions: {
+                    print: true
+                },
+                axisX: {
+                    categoricalValues: ["Январь", "Февраль", "Март", "Апрель", "Май"]
+                },
+                tooltipSettings: {
+                    chartBound: true,
+                    axisMarkers: {
+                        enabled: true,
+                        mode: 'xy'
+                    }
+                },
+                dataSeries: [{
+                    seriesType: 'line',
+                    collectionAlias: "Куплено абонементов 2021",
+                    data: [15, 19, 21, 20, 26]
+                }]
+            });
+        };
+        function build3() {
+            $("#chart2").shieldChart({
+                theme: "light",
+                primaryHeader: {
+                    text: "Рост клиентской базы"
+                },
+                exportOptions: {
+                    print: true
+                },
+                axisX: {
+                    categoricalValues: ["Январь", "Февраль", "Март", "Апрель", "Май"]
+                },
+                tooltipSettings: {
+                    chartBound: true,
+                    axisMarkers: {
+                        enabled: true,
+                        mode: 'xy'
+                    }
+                },
+                dataSeries: [{
+                    seriesType: 'line',
+                    collectionAlias: "Новые клиенты 2021",
+                    data: [8, 7, 9, 11, 10]
+                }]
+            });
+        };
+        function build4() {
+            $("#chart4").shieldChart({
+                theme: "light",
+                exportOptions: {
+                    image: false,
+                    print: false
+                },
+                primaryHeader: {
+                    text: "Текущая численность клиентской базы по категориям"
+                },
+                chartLegend: {
+                    enabled: true
+                },
+                seriesSettings: {
+                    pie: {
+                        enablePointSelection: true
+                    }
+                },
+                dataSeries: [{
+                    seriesType: "pie",
+                    collectionAlias: "Рассматриваемое:",
+                    data: [
+                        ["Студенты", 13],
+                        { collectionAlias: "Пенсионеры", y: 7, selected: true },
+                        ["Сотрудники", 10],
+                        ["Не определено", 18],
+                    ]
+                }]
+            });
+        }
+        function build5() {
+            $(document).ready(function () {
+                $("#chart5").shieldChart({
+                    theme: "light",
+                    primaryHeader: {
+                        text: "Категории клиентов"
+                    },
+                    exportOptions: {
+                        image: false,
+                        print: false
+                    },
+                    axisX: {
+                        categoricalValues: ["Студенты", "Пенсионеры", "Сотрудники", "Не определено"]
+                    },
+                    tooltipSettings: {
+                        chartBound: true,
+                        axisMarkers: {
+                            enabled: true,
+                            mode: 'x'
+                        }
+                    },
+                    dataSeries: [{
+                        seriesType: 'bar',
+                        collectionAlias: "Число клиентов с категорией, чел.",
+                        data: [13, 7, 10, 18]
+                    }]
+                });
+            });
+        }
+    </script>
+}

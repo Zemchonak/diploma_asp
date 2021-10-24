@@ -22,6 +22,15 @@ namespace FitnessCenterManagement.WebApp.Controllers
             _api = api;
         }
 
+        [AllowAnonymous]
+        [HttpGet("names")]
+        public async Task<IActionResult> GetNames()
+        {
+            var response = await _api.GetVenues();
+            var content = await JsonHelper.DeserializeContentAsync<IReadOnlyCollection<VenueModel>>(response);
+            return new JsonResult(content.Select(a => a.Name).ToArray());
+        }
+
         [HttpGet("find")]
         [AllowAnonymous]
         public async Task<IActionResult> Find(string part)
